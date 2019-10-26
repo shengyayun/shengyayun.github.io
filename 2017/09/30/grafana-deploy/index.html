@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="导言grafana 是基于JS开发的，功能齐全的度量仪表盘和图形编辑器。我们可以通过collectd和业务代码采集数据，通过influxdb存储数据，最后通过grafana的web端进行展现。 一. 安装12wget https:&#x2F;&#x2F;s3-us-west-2.amazonaws.com&#x2F;grafana-releases&#x2F;release&#x2F;grafana-4.5.2-1.x86_64.rpmsudo">
+<meta name="keywords" content="centos,grafana">
+<meta property="og:type" content="article">
+<meta property="og:title" content="grafana的部署">
+<meta property="og:url" content="shengyayun.github.io&#x2F;2017&#x2F;09&#x2F;30&#x2F;grafana-deploy&#x2F;index.html">
+<meta property="og:site_name" content="shengyayun&#39;s Notebook">
+<meta property="og:description" content="导言grafana 是基于JS开发的，功能齐全的度量仪表盘和图形编辑器。我们可以通过collectd和业务代码采集数据，通过influxdb存储数据，最后通过grafana的web端进行展现。 一. 安装12wget https:&#x2F;&#x2F;s3-us-west-2.amazonaws.com&#x2F;grafana-releases&#x2F;release&#x2F;grafana-4.5.2-1.x86_64.rpmsudo">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-26T04:24:07.948Z">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>grafana的部署</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/10/01/php-curl-data-binary/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/09/30/collectd-deploy/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=shengyayun.github.io/2017/09/30/grafana-deploy/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=shengyayun.github.io/2017/09/30/grafana-deploy/&text=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=shengyayun.github.io/2017/09/30/grafana-deploy/&title=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=shengyayun.github.io/2017/09/30/grafana-deploy/&is_video=false&description=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=grafana的部署&body=Check out this article: shengyayun.github.io/2017/09/30/grafana-deploy/" target="_blank" rel="noopener"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=shengyayun.github.io/2017/09/30/grafana-deploy/&title=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=shengyayun.github.io/2017/09/30/grafana-deploy/&title=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=shengyayun.github.io/2017/09/30/grafana-deploy/&title=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=shengyayun.github.io/2017/09/30/grafana-deploy/&title=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=shengyayun.github.io/2017/09/30/grafana-deploy/&name=grafana的部署&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#导言"><span class="toc-number">1.</span> <span class="toc-text">导言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一-安装"><span class="toc-number">2.</span> <span class="toc-text">一. 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-http配置修改"><span class="toc-number">3.</span> <span class="toc-text">二. http配置修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-smtp配置修改"><span class="toc-number">4.</span> <span class="toc-text">三. smtp配置修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-管理员账号配置修改"><span class="toc-number">5.</span> <span class="toc-text">四. 管理员账号配置修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-服务运行与开机自启动"><span class="toc-number">6.</span> <span class="toc-text">五. 服务运行与开机自启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六-测试"><span class="toc-number">7.</span> <span class="toc-text">六. 测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七-其他"><span class="toc-number">8.</span> <span class="toc-text">七. 其他</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        grafana的部署
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">shengyayun's Notebook</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-09-30T13:34:48.000Z" itemprop="datePublished">2017-09-30</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/centos/" rel="tag">centos</a>, <a class="tag-link" href="/tags/grafana/" rel="tag">grafana</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>grafana 是基于JS开发的，功能齐全的度量仪表盘和图形编辑器。我们可以通过collectd和业务代码采集数据，通过influxdb存储数据，最后通过grafana的web端进行展现。</p>
+<h2 id="一-安装"><a href="#一-安装" class="headerlink" title="一. 安装"></a>一. 安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-4.5.2-1.x86_64.rpm</span><br><span class="line">sudo yum localinstall grafana-4.5.2-1.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-http配置修改"><a href="#二-http配置修改" class="headerlink" title="二. http配置修改"></a>二. http配置修改</h2><p>用vim打开文件/etc/grafana/grafana.ini，下面我们查看<code>[server]</code>的配置：</p>
+<ul>
+<li><code>http_port</code>默认是<code>3000</code>，代表它自带的http服务默认监听3000端口。</li>
+<li><code>domain</code>默认是<code>localhost</code>，结合上面的默认端口，我们可以通过<code>http://localhost:3000</code>来访问grafana的图形化界面。</li>
+<li><code>root_url</code>这个配置主要为了在使用反向代理后能正常跳转，同时邮件可以提供正确的url。</li>
+</ul>
+<p>这里有个案例，我希望可以通过<code>http://watch.langdaren.com</code>直接访问grafana，但80端口已经被nginx占用：</p>
+<ol>
+<li><code>http_port</code>不修改，保留默认的<code>3000</code>。</li>
+<li><code>domain</code>改为<code>watch.langdaren.com</code>。</li>
+<li><code>root_url</code>改为<code>http://watch.langdaren.com</code>。</li>
+<li>修改nginx配置，添加一条这样的server配置：<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">　　<span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">　　<span class="attribute">server_name</span>  watch.langdaren.com;</span><br><span class="line">　　<span class="attribute">location</span> / &#123;</span><br><span class="line">　　　　<span class="attribute">proxy_pass</span>   http://127.0.0.1:3000;</span><br><span class="line">　　&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+nginx配置修改完记得先执行<code>nginx -t</code>测试一下配置，然后再执行<code>nginx -s reload</code>进行重启。</li>
+</ol>
+<h2 id="三-smtp配置修改"><a href="#三-smtp配置修改" class="headerlink" title="三. smtp配置修改"></a>三. smtp配置修改</h2><p>配置正确的smtp，可以让grafana可以自动发送邮件，下面我使用我的腾讯邮箱进行配置。<br>用vim打开配置文件，下面我们查看<code>[smtp]</code>的配置：</p>
+<ol>
+<li><code>enabled</code>修改为<code>true</code>。</li>
+<li><code>host</code>修改为邮件系统的发送服务器地址，这里是<code>smtp.exmail.qq.com:465</code>。</li>
+<li><code>user</code>修改为我的邮箱全名<code>719048774@qq.com</code>。</li>
+<li><code>password</code>修改为我的邮箱密码。</li>
+<li><code>from_address</code>修改为邮箱全名<code>719048774@qq.com</code>。</li>
+<li><code>from_name</code>改为<code>shengyayun</code>。</li>
+</ol>
+<h2 id="四-管理员账号配置修改"><a href="#四-管理员账号配置修改" class="headerlink" title="四. 管理员账号配置修改"></a>四. 管理员账号配置修改</h2><p>用vim打开配置文件，下面我们查看<code>[security]</code>的配置：</p>
+<ol>
+<li><code>admin_user</code>默认为<code>admin</code>，这个是管理员账号名，按需修改。</li>
+<li><code>admin_password</code>默认为<code>admin</code>，这个是管理员密码，按需修改。</li>
+</ol>
+<h2 id="五-服务运行与开机自启动"><a href="#五-服务运行与开机自启动" class="headerlink" title="五. 服务运行与开机自启动"></a>五. 服务运行与开机自启动</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start grafana-server</span><br><span class="line">systemctl <span class="built_in">enable</span> grafana-server</span><br></pre></td></tr></table></figure>
+
+<h2 id="六-测试"><a href="#六-测试" class="headerlink" title="六. 测试"></a>六. 测试</h2><p>通过第二步的http配置，就知道如何访问grafana的web端了。默认的地址是<code>http://localhost:3000</code>，在我的案例里的地址是<code>http://watch.langdaren.com</code>。</p>
+<h2 id="七-其他"><a href="#七-其他" class="headerlink" title="七. 其他"></a>七. 其他</h2><p>grafana访问influxdb并创建dashboard之类操作，都是通过grafana的web端的管理员功能完成的，这里不做详细介绍，具体可以查看官网<code>http://docs.grafana.org</code>。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#导言"><span class="toc-number">1.</span> <span class="toc-text">导言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一-安装"><span class="toc-number">2.</span> <span class="toc-text">一. 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-http配置修改"><span class="toc-number">3.</span> <span class="toc-text">二. http配置修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-smtp配置修改"><span class="toc-number">4.</span> <span class="toc-text">三. smtp配置修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-管理员账号配置修改"><span class="toc-number">5.</span> <span class="toc-text">四. 管理员账号配置修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-服务运行与开机自启动"><span class="toc-number">6.</span> <span class="toc-text">五. 服务运行与开机自启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六-测试"><span class="toc-number">7.</span> <span class="toc-text">六. 测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七-其他"><span class="toc-number">8.</span> <span class="toc-text">七. 其他</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=shengyayun.github.io/2017/09/30/grafana-deploy/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=shengyayun.github.io/2017/09/30/grafana-deploy/&text=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=shengyayun.github.io/2017/09/30/grafana-deploy/&title=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=shengyayun.github.io/2017/09/30/grafana-deploy/&is_video=false&description=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=grafana的部署&body=Check out this article: shengyayun.github.io/2017/09/30/grafana-deploy/" target="_blank" rel="noopener"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=shengyayun.github.io/2017/09/30/grafana-deploy/&title=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=shengyayun.github.io/2017/09/30/grafana-deploy/&title=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=shengyayun.github.io/2017/09/30/grafana-deploy/&title=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=shengyayun.github.io/2017/09/30/grafana-deploy/&title=grafana的部署" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=shengyayun.github.io/2017/09/30/grafana-deploy/&name=grafana的部署&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 shengyayun
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?3e16ac109a038cf3fea0a2f7cca1bc6c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'shengyayun';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Get Started, Part 2: ContainersBest practices for writing Dockerfiles  导言这里将通过一个简单的场景来学习Dockerfile的使用：制作一个安装了openresty的centos的镜像（image）。 123456789101112Server: Docker Engine - Community Engine:  Vers">
+<meta name="keywords" content="centos,docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过Dockerfile生成镜像">
+<meta property="og:url" content="shengyayun.github.io&#x2F;2019&#x2F;04&#x2F;29&#x2F;docker-build-image&#x2F;index.html">
+<meta property="og:site_name" content="shengyayun&#39;s Notebook">
+<meta property="og:description" content="Get Started, Part 2: ContainersBest practices for writing Dockerfiles  导言这里将通过一个简单的场景来学习Dockerfile的使用：制作一个安装了openresty的centos的镜像（image）。 123456789101112Server: Docker Engine - Community Engine:  Vers">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-26T04:24:07.946Z">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>通过Dockerfile生成镜像</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/05/04/docker-registry/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/04/22/raft/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=shengyayun.github.io/2019/04/29/docker-build-image/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=shengyayun.github.io/2019/04/29/docker-build-image/&text=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=shengyayun.github.io/2019/04/29/docker-build-image/&title=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=shengyayun.github.io/2019/04/29/docker-build-image/&is_video=false&description=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=通过Dockerfile生成镜像&body=Check out this article: shengyayun.github.io/2019/04/29/docker-build-image/" target="_blank" rel="noopener"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=shengyayun.github.io/2019/04/29/docker-build-image/&title=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=shengyayun.github.io/2019/04/29/docker-build-image/&title=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=shengyayun.github.io/2019/04/29/docker-build-image/&title=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=shengyayun.github.io/2019/04/29/docker-build-image/&title=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=shengyayun.github.io/2019/04/29/docker-build-image/&name=通过Dockerfile生成镜像&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#导言"><span class="toc-number">1.</span> <span class="toc-text">导言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一-创建一个工作目录"><span class="toc-number">2.</span> <span class="toc-text">一. 创建一个工作目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-在工作目录中创建一个Dockerfile文件"><span class="toc-number">3.</span> <span class="toc-text">二. 在工作目录中创建一个Dockerfile文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-在工作目录中创建一个entrypoint-sh文件"><span class="toc-number">4.</span> <span class="toc-text">三. 在工作目录中创建一个entrypoint.sh文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-在工作目录下build镜像"><span class="toc-number">5.</span> <span class="toc-text">四. 在工作目录下build镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-创建容器"><span class="toc-number">6.</span> <span class="toc-text">五. 创建容器</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        通过Dockerfile生成镜像
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">shengyayun's Notebook</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-04-29T12:54:48.000Z" itemprop="datePublished">2019-04-29</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/centos/" rel="tag">centos</a>, <a class="tag-link" href="/tags/docker/" rel="tag">docker</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p><a href="https://docs.docker.com/get-started/part2/" target="_blank" rel="noopener">Get Started, Part 2: Containers</a><br><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" target="_blank" rel="noopener">Best practices for writing Dockerfiles</a></p>
+</blockquote>
+<h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>这里将通过一个简单的场景来学习Dockerfile的使用：制作一个安装了openresty的centos的镜像（image）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          18.09.2</span><br><span class="line">  API version:      1.39 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.10.6</span><br><span class="line">  Git commit:       6247962</span><br><span class="line">  Built:            Sun Feb 10 04:13:06 2019</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     false</span><br><span class="line"> Kubernetes:</span><br><span class="line">  Version:          v1.10.11</span><br><span class="line">  StackAPI:         v1beta2</span><br></pre></td></tr></table></figure>
+
+<h2 id="一-创建一个工作目录"><a href="#一-创建一个工作目录" class="headerlink" title="一. 创建一个工作目录"></a>一. 创建一个工作目录</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 后续这个目录将存放Dockerfile和entrypoint.sh</span></span><br><span class="line">mkdir hello</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-在工作目录中创建一个Dockerfile文件"><a href="#二-在工作目录中创建一个Dockerfile文件" class="headerlink" title="二. 在工作目录中创建一个Dockerfile文件"></a>二. 在工作目录中创建一个Dockerfile文件</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定基础镜像，并且必须是第一条指令（如果不需要基础镜像，那么替换为 FROM scratch）</span></span><br><span class="line"><span class="comment"># 这里的centos是镜像名，7是标签。这里对应系统centos 7</span></span><br><span class="line">FROM centos:7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 容器的工作路径，对后续的RUN, CMD, ENTRYPOINT, COPY, ADD生效（如果对应的目录不存在则会创建，可以重复设置）</span></span><br><span class="line"><span class="comment"># 这里会在容器中创建一个/app文件夹，下面的对应操作会在/app中进行</span></span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从本地拷贝文件到容器</span></span><br><span class="line"><span class="comment"># 这里会把本地的demo目录内的全部文件拷贝到容器的/app目录下（./指当前目录，而当前目录通过WORKDIR定义）</span></span><br><span class="line">COPY * ./</span><br><span class="line"></span><br><span class="line"><span class="comment"># 容器在build时执行指令</span></span><br><span class="line">RUN yum install -y lsof git</span><br><span class="line">RUN yum install -y yum-utils</span><br><span class="line">RUN yum-config-manager -y --add-repo https://openresty.org/package/centos/openresty.repo</span><br><span class="line">RUN yum install -y openresty</span><br><span class="line"></span><br><span class="line"><span class="comment"># 容器启动时执行指令，CMD命令的功能类似，但主要区别在于CMD可被dock run的COMMAND参数覆盖，而ENTRYPOINT不会</span></span><br><span class="line"><span class="comment"># 如果CMD或ENTRYPOINT配置了多条，且CMD指令不是完整的可执行命令，那么CMD的内容将成为ENTRYPOINT的参数。反之仅最后一条生效。</span></span><br><span class="line"><span class="comment"># 当容器启动时会执行/app/entrypoint.sh文件（build的时候不会执行），该文件在上面的COPY操作中被docker从本地的工作目录拷贝到了容器的/app目录</span></span><br><span class="line">ENTRYPOINT ./entrypoint.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对外开放端口</span></span><br><span class="line"><span class="comment"># 若果不将80端口对外暴露，容器外将无法访问容器的80端口</span></span><br><span class="line">EXPOSE 80</span><br></pre></td></tr></table></figure>
+
+<h2 id="三-在工作目录中创建一个entrypoint-sh文件"><a href="#三-在工作目录中创建一个entrypoint-sh文件" class="headerlink" title="三. 在工作目录中创建一个entrypoint.sh文件"></a>三. 在工作目录中创建一个entrypoint.sh文件</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动openresty服务</span></span><br><span class="line">openresty</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker会将没有前台守护进程的容器直接关闭，所以这里通过本指令阻塞脚本的执行</span></span><br><span class="line">tail -f /dev/null</span><br></pre></td></tr></table></figure>
+<p>文件生成完成后，记得还要通过<code>chmod +x entrypoint.sh</code>给脚本加上执行权限，否则容器启动时将无法执行脚本。</p>
+<h2 id="四-在工作目录下build镜像"><a href="#四-在工作目录下build镜像" class="headerlink" title="四. 在工作目录下build镜像"></a>四. 在工作目录下build镜像</h2><blockquote>
+<p>Usage:    docker build [OPTIONS] PATH | URL | -</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 待生成镜像的name为hello，tag为缺省值latest，路径为.（当前工作目录）</span></span><br><span class="line">docker build -t hello .</span><br><span class="line"><span class="comment"># 指令执行完成后，控制台输出镜像完整的ID</span></span><br></pre></td></tr></table></figure>
+<p>执行<code>docker image ls</code>，docker会打印出本地存储的全部镜像，其中REPOSITORY为hello，TAG为latest的记录对应刚创建的镜像。</p>
+<h2 id="五-创建容器"><a href="#五-创建容器" class="headerlink" title="五. 创建容器"></a>五. 创建容器</h2><blockquote>
+<p>Usage:    docker run [OPTIONS] IMAGE [COMMAND] [ARG…]</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -d 该容器在后台执行</span></span><br><span class="line"><span class="comment"># -p 4000:80 将容器的80端口映射到本地的4000端口（通过localhost:4000访问容器的openresty的80端口）。</span></span><br><span class="line"><span class="comment"># hello 使用镜像hello</span></span><br><span class="line">docker run -d -p 4000:80 hello</span><br><span class="line"><span class="comment"># 指令执行完成后，控制台输出容器完整的ID</span></span><br></pre></td></tr></table></figure>
+<p>执行<code>docker container ls</code>，docker会打印出本地执行中的全部容器，其中IMAGE为hello的记录对应刚启动的容器。<br>打开浏览器访问<code>http://localhost:4000</code>，可以看到openrestry的默认主页，至此镜像及其对应的容器已创建完成。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#导言"><span class="toc-number">1.</span> <span class="toc-text">导言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一-创建一个工作目录"><span class="toc-number">2.</span> <span class="toc-text">一. 创建一个工作目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-在工作目录中创建一个Dockerfile文件"><span class="toc-number">3.</span> <span class="toc-text">二. 在工作目录中创建一个Dockerfile文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-在工作目录中创建一个entrypoint-sh文件"><span class="toc-number">4.</span> <span class="toc-text">三. 在工作目录中创建一个entrypoint.sh文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-在工作目录下build镜像"><span class="toc-number">5.</span> <span class="toc-text">四. 在工作目录下build镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-创建容器"><span class="toc-number">6.</span> <span class="toc-text">五. 创建容器</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=shengyayun.github.io/2019/04/29/docker-build-image/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=shengyayun.github.io/2019/04/29/docker-build-image/&text=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=shengyayun.github.io/2019/04/29/docker-build-image/&title=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=shengyayun.github.io/2019/04/29/docker-build-image/&is_video=false&description=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=通过Dockerfile生成镜像&body=Check out this article: shengyayun.github.io/2019/04/29/docker-build-image/" target="_blank" rel="noopener"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=shengyayun.github.io/2019/04/29/docker-build-image/&title=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=shengyayun.github.io/2019/04/29/docker-build-image/&title=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=shengyayun.github.io/2019/04/29/docker-build-image/&title=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=shengyayun.github.io/2019/04/29/docker-build-image/&title=通过Dockerfile生成镜像" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=shengyayun.github.io/2019/04/29/docker-build-image/&name=通过Dockerfile生成镜像&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 shengyayun
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?3e16ac109a038cf3fea0a2f7cca1bc6c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'shengyayun';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="指令：mysql&amp;gt; show variables;&#x2F;&#x2F;查看mysql具体配置 mysql&amp;gt; show global status;&#x2F;&#x2F;查看mysql运行状态 配置是写在my.cnf里面的，而状态是具体执行时的指标 慢查：配置：slow_launch_time：2 &#x2F;&#x2F;执行时间超过2秒就会被记录为慢查 slow_query_log：ON &#x2F;&#x2F;慢查会被记录 slow_query_log_f">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql配置与运行状态的分析与优化">
+<meta property="og:url" content="shengyayun.github.io&#x2F;2017&#x2F;08&#x2F;15&#x2F;mysql-optimize&#x2F;index.html">
+<meta property="og:site_name" content="shengyayun&#39;s Notebook">
+<meta property="og:description" content="指令：mysql&amp;gt; show variables;&#x2F;&#x2F;查看mysql具体配置 mysql&amp;gt; show global status;&#x2F;&#x2F;查看mysql运行状态 配置是写在my.cnf里面的，而状态是具体执行时的指标 慢查：配置：slow_launch_time：2 &#x2F;&#x2F;执行时间超过2秒就会被记录为慢查 slow_query_log：ON &#x2F;&#x2F;慢查会被记录 slow_query_log_f">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-26T04:24:07.952Z">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>mysql配置与运行状态的分析与优化</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/30/influxdb-deploy/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=shengyayun.github.io/2017/08/15/mysql-optimize/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=shengyayun.github.io/2017/08/15/mysql-optimize/&text=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=shengyayun.github.io/2017/08/15/mysql-optimize/&title=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=shengyayun.github.io/2017/08/15/mysql-optimize/&is_video=false&description=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=mysql配置与运行状态的分析与优化&body=Check out this article: shengyayun.github.io/2017/08/15/mysql-optimize/" target="_blank" rel="noopener"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=shengyayun.github.io/2017/08/15/mysql-optimize/&title=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=shengyayun.github.io/2017/08/15/mysql-optimize/&title=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=shengyayun.github.io/2017/08/15/mysql-optimize/&title=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=shengyayun.github.io/2017/08/15/mysql-optimize/&title=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=shengyayun.github.io/2017/08/15/mysql-optimize/&name=mysql配置与运行状态的分析与优化&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#指令："><span class="toc-number">1.</span> <span class="toc-text">指令：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#慢查："><span class="toc-number">2.</span> <span class="toc-text">慢查：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置："><span class="toc-number">2.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态："><span class="toc-number">2.0.2.</span> <span class="toc-text">状态：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最大连接数："><span class="toc-number">3.</span> <span class="toc-text">最大连接数：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-1"><span class="toc-number">3.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-1"><span class="toc-number">3.0.2.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望："><span class="toc-number">3.0.3.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引缓存-对MyISAM性能影响很大"><span class="toc-number">4.</span> <span class="toc-text">索引缓存(对MyISAM性能影响很大)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-2"><span class="toc-number">4.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-2"><span class="toc-number">4.0.2.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望：-1"><span class="toc-number">4.0.3.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#临时表"><span class="toc-number">5.</span> <span class="toc-text">临时表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-3"><span class="toc-number">5.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-3"><span class="toc-number">5.0.2.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望：-2"><span class="toc-number">5.0.3.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表缓存"><span class="toc-number">6.</span> <span class="toc-text">表缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-4"><span class="toc-number">6.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-4"><span class="toc-number">6.0.2.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望：-3"><span class="toc-number">6.0.3.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程缓存"><span class="toc-number">7.</span> <span class="toc-text">线程缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-5"><span class="toc-number">7.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-5"><span class="toc-number">7.0.2.</span> <span class="toc-text">状态：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件打开数"><span class="toc-number">8.</span> <span class="toc-text">文件打开数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-6"><span class="toc-number">8.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-6"><span class="toc-number">8.0.2.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望：-4"><span class="toc-number">8.0.3.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表锁"><span class="toc-number">9.</span> <span class="toc-text">表锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-7"><span class="toc-number">9.0.1.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望：-5"><span class="toc-number">9.0.2.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        mysql配置与运行状态的分析与优化
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">shengyayun's Notebook</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-08-15T11:38:10.000Z" itemprop="datePublished">2017-08-15</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/mysql/" rel="tag">mysql</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="指令："><a href="#指令：" class="headerlink" title="指令："></a>指令：</h2><p>mysql&gt; show variables;//查看mysql具体配置</p>
+<p>mysql&gt; show global status;//查看mysql运行状态</p>
+<p>配置是写在my.cnf里面的，而状态是具体执行时的指标</p>
+<h2 id="慢查："><a href="#慢查：" class="headerlink" title="慢查："></a>慢查：</h2><h4 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h4><p>slow_launch_time：2 //执行时间超过2秒就会被记录为慢查</p>
+<p>slow_query_log：ON //慢查会被记录</p>
+<p>slow_query_log_file：iZ23qcdbhgiZ-slow.log //慢查日志文件名</p>
+<h4 id="状态："><a href="#状态：" class="headerlink" title="状态："></a>状态：</h4><p>slow_launch_threads：0 //创建时间超过slow_launch_time秒的线程数</p>
+<p>slow_queries：0 //慢查个数</p>
+<h2 id="最大连接数："><a href="#最大连接数：" class="headerlink" title="最大连接数："></a>最大连接数：</h2><h4 id="配置：-1"><a href="#配置：-1" class="headerlink" title="配置："></a>配置：</h4><p>max_connections：256 //允许的最大连接数</p>
+<h4 id="状态：-1"><a href="#状态：-1" class="headerlink" title="状态："></a>状态：</h4><p>max_used_connections：123 //实际运行中的最大连接数</p>
+<h4 id="期望："><a href="#期望：" class="headerlink" title="期望："></a>期望：</h4><p>max_used_connections / max_connections * 100% ≈ 85%</p>
+<h2 id="索引缓存-对MyISAM性能影响很大"><a href="#索引缓存-对MyISAM性能影响很大" class="headerlink" title="索引缓存(对MyISAM性能影响很大)"></a>索引缓存(对MyISAM性能影响很大)</h2><h4 id="配置：-2"><a href="#配置：-2" class="headerlink" title="配置："></a>配置：</h4><p>key_buffer_size：134217728 //索引缓存大小</p>
+<h4 id="状态：-2"><a href="#状态：-2" class="headerlink" title="状态："></a>状态：</h4><p>key_read_requests：123 //索引读取请求个数</p>
+<p>Key_reads： 123 //没有命中缓存而去硬盘读取的次数</p>
+<p>Key_blocks_unused：123 //未使用的缓存簇(blocks)数</p>
+<p>Key_blocks_used： //曾经用到的最大的blocks数</p>
+<h4 id="期望：-1"><a href="#期望：-1" class="headerlink" title="期望："></a>期望：</h4><p>key_reads / key_read_requests * 100% &lt; 0.1%</p>
+<p>key_blocks_used / (key_blocks_unused + key_blocks_used) * 100% ≈ 80%</p>
+<h2 id="临时表"><a href="#临时表" class="headerlink" title="临时表"></a>临时表</h2><h4 id="配置：-3"><a href="#配置：-3" class="headerlink" title="配置："></a>配置：</h4><p>max_heap_table_size：16777216 //内存表的最大大小</p>
+<p>tmp_table_size：16777216 //内存临时表最大大小</p>
+<h4 id="状态：-3"><a href="#状态：-3" class="headerlink" title="状态："></a>状态：</h4><p>Created_tmp_disk_tables：0 //创建(内存或磁盘)临时表的次数</p>
+<p>Created_tmp_files：6 //临时文件个数 </p>
+<p>Created_tmp_tables：22 //创建磁盘临时表的次数</p>
+<h4 id="期望：-2"><a href="#期望：-2" class="headerlink" title="期望："></a>期望：</h4><p>理想#### 状态：created_tmp_disk_tables / created_tmp_tables * 100% &lt;= 25%</p>
+<p>备注：</p>
+<p>当查询需要使用临时表的时候，系统会优先创建内存临时表(MEMORY引擎)。但如果内存临时表大小超过了max_heap_table_size或者tmp_table_size，它就会转为磁盘临时表(MyISAM引擎)。</p>
+<h2 id="表缓存"><a href="#表缓存" class="headerlink" title="表缓存"></a>表缓存</h2><h4 id="配置：-4"><a href="#配置：-4" class="headerlink" title="配置："></a>配置：</h4><p>table_cache(table_open_cache)： 3//缓存的打开的表的数量</p>
+<h4 id="状态：-4"><a href="#状态：-4" class="headerlink" title="状态："></a>状态：</h4><p>open_tables：1 //打开表的数量</p>
+<p>opened_tables： 2//表示打开过的表数量</p>
+<h4 id="期望：-3"><a href="#期望：-3" class="headerlink" title="期望："></a>期望：</h4><p>Open_tables / Opened_tables * 100% &gt;= 85%</p>
+<p>Open_tables / table_cache * 100% &lt;= 95%</p>
+<h2 id="线程缓存"><a href="#线程缓存" class="headerlink" title="线程缓存"></a>线程缓存</h2><h4 id="配置：-5"><a href="#配置：-5" class="headerlink" title="配置："></a>配置：</h4><p>thread_cache_size：13 //服务器缓存的用来处理用户查询的线程</p>
+<h4 id="状态：-5"><a href="#状态：-5" class="headerlink" title="状态："></a>状态：</h4><p>threads_created：12 //表示创建过的线程数</p>
+<h2 id="文件打开数"><a href="#文件打开数" class="headerlink" title="文件打开数"></a>文件打开数</h2><h4 id="配置：-6"><a href="#配置：-6" class="headerlink" title="配置："></a>配置：</h4><p>open_files_limit：1024 //允许同时打开的最大文件数</p>
+<h4 id="状态：-6"><a href="#状态：-6" class="headerlink" title="状态："></a>状态：</h4><p>open_files：123 //当前打开的文件数</p>
+<h4 id="期望：-4"><a href="#期望：-4" class="headerlink" title="期望："></a>期望：</h4><p>open_files / open_files_limit * 100% &lt;= 75％</p>
+<h2 id="表锁"><a href="#表锁" class="headerlink" title="表锁"></a>表锁</h2><h4 id="状态：-7"><a href="#状态：-7" class="headerlink" title="状态："></a>状态：</h4><p>table_locks_immediate： 123//立即释放表锁数</p>
+<p>table_locks_waited： 456//需要等待的表锁数</p>
+<h4 id="期望：-5"><a href="#期望：-5" class="headerlink" title="期望："></a>期望：</h4><p>table_locks_immediate / table_locks_waited &gt; 5000 时推荐使用高并发更新性能好的innodb引擎</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#指令："><span class="toc-number">1.</span> <span class="toc-text">指令：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#慢查："><span class="toc-number">2.</span> <span class="toc-text">慢查：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置："><span class="toc-number">2.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态："><span class="toc-number">2.0.2.</span> <span class="toc-text">状态：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最大连接数："><span class="toc-number">3.</span> <span class="toc-text">最大连接数：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-1"><span class="toc-number">3.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-1"><span class="toc-number">3.0.2.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望："><span class="toc-number">3.0.3.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引缓存-对MyISAM性能影响很大"><span class="toc-number">4.</span> <span class="toc-text">索引缓存(对MyISAM性能影响很大)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-2"><span class="toc-number">4.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-2"><span class="toc-number">4.0.2.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望：-1"><span class="toc-number">4.0.3.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#临时表"><span class="toc-number">5.</span> <span class="toc-text">临时表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-3"><span class="toc-number">5.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-3"><span class="toc-number">5.0.2.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望：-2"><span class="toc-number">5.0.3.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表缓存"><span class="toc-number">6.</span> <span class="toc-text">表缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-4"><span class="toc-number">6.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-4"><span class="toc-number">6.0.2.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望：-3"><span class="toc-number">6.0.3.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程缓存"><span class="toc-number">7.</span> <span class="toc-text">线程缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-5"><span class="toc-number">7.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-5"><span class="toc-number">7.0.2.</span> <span class="toc-text">状态：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件打开数"><span class="toc-number">8.</span> <span class="toc-text">文件打开数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置：-6"><span class="toc-number">8.0.1.</span> <span class="toc-text">配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-6"><span class="toc-number">8.0.2.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望：-4"><span class="toc-number">8.0.3.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表锁"><span class="toc-number">9.</span> <span class="toc-text">表锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#状态：-7"><span class="toc-number">9.0.1.</span> <span class="toc-text">状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#期望：-5"><span class="toc-number">9.0.2.</span> <span class="toc-text">期望：</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=shengyayun.github.io/2017/08/15/mysql-optimize/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=shengyayun.github.io/2017/08/15/mysql-optimize/&text=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=shengyayun.github.io/2017/08/15/mysql-optimize/&title=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=shengyayun.github.io/2017/08/15/mysql-optimize/&is_video=false&description=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=mysql配置与运行状态的分析与优化&body=Check out this article: shengyayun.github.io/2017/08/15/mysql-optimize/" target="_blank" rel="noopener"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=shengyayun.github.io/2017/08/15/mysql-optimize/&title=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=shengyayun.github.io/2017/08/15/mysql-optimize/&title=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=shengyayun.github.io/2017/08/15/mysql-optimize/&title=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=shengyayun.github.io/2017/08/15/mysql-optimize/&title=mysql配置与运行状态的分析与优化" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=shengyayun.github.io/2017/08/15/mysql-optimize/&name=mysql配置与运行状态的分析与优化&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 shengyayun
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?3e16ac109a038cf3fea0a2f7cca1bc6c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'shengyayun';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

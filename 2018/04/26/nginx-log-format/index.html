@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="一. 在nginx.conf的http块中添加日志格式main2018：1log_format main2018 &amp;apos;$remote_addr|$remote_user|$time_local|$request|$status|$body_bytes_sent|$http_referer|$http_user_agent|$http_x_forwarded_for|$request_time|$up">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx站点访问日志">
+<meta property="og:url" content="shengyayun.github.io&#x2F;2018&#x2F;04&#x2F;26&#x2F;nginx-log-format&#x2F;index.html">
+<meta property="og:site_name" content="shengyayun&#39;s Notebook">
+<meta property="og:description" content="一. 在nginx.conf的http块中添加日志格式main2018：1log_format main2018 &amp;apos;$remote_addr|$remote_user|$time_local|$request|$status|$body_bytes_sent|$http_referer|$http_user_agent|$http_x_forwarded_for|$request_time|$up">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-26T04:24:07.954Z">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>nginx站点访问日志</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/05/26/maven-manifest/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/10/mongodb-replica-sets/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=shengyayun.github.io/2018/04/26/nginx-log-format/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=shengyayun.github.io/2018/04/26/nginx-log-format/&text=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=shengyayun.github.io/2018/04/26/nginx-log-format/&title=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=shengyayun.github.io/2018/04/26/nginx-log-format/&is_video=false&description=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=nginx站点访问日志&body=Check out this article: shengyayun.github.io/2018/04/26/nginx-log-format/" target="_blank" rel="noopener"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=shengyayun.github.io/2018/04/26/nginx-log-format/&title=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=shengyayun.github.io/2018/04/26/nginx-log-format/&title=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=shengyayun.github.io/2018/04/26/nginx-log-format/&title=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=shengyayun.github.io/2018/04/26/nginx-log-format/&title=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=shengyayun.github.io/2018/04/26/nginx-log-format/&name=nginx站点访问日志&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-在nginx-conf的http块中添加日志格式main2018："><span class="toc-number">1.</span> <span class="toc-text">一. 在nginx.conf的http块中添加日志格式main2018：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-在对应项目的server中配置该站点的访问日志："><span class="toc-number">2.</span> <span class="toc-text">二. 在对应项目的server中配置该站点的访问日志：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-重启nginx"><span class="toc-number">3.</span> <span class="toc-text">三. 重启nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-查看访问日志"><span class="toc-number">4.</span> <span class="toc-text">四. 查看访问日志</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        nginx站点访问日志
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">shengyayun's Notebook</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-04-26T11:42:30.000Z" itemprop="datePublished">2018-04-26</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/nginx/" rel="tag">nginx</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="一-在nginx-conf的http块中添加日志格式main2018："><a href="#一-在nginx-conf的http块中添加日志格式main2018：" class="headerlink" title="一. 在nginx.conf的http块中添加日志格式main2018："></a>一. 在nginx.conf的<code>http</code>块中添加日志格式<code>main2018</code>：</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">log_format</span> main2018 <span class="string">'<span class="variable">$remote_addr</span>|<span class="variable">$remote_user</span>|<span class="variable">$time_local</span>|<span class="variable">$request</span>|<span class="variable">$status</span>|<span class="variable">$body_bytes_sent</span>|<span class="variable">$http_referer</span>|<span class="variable">$http_user_agent</span>|<span class="variable">$http_x_forwarded_for</span>|<span class="variable">$request_time</span>|<span class="variable">$upstream_response_time</span>|<span class="variable">$upstream_addr</span>|<span class="variable">$upstream_status</span>'</span>;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="二-在对应项目的server中配置该站点的访问日志："><a href="#二-在对应项目的server中配置该站点的访问日志：" class="headerlink" title="二. 在对应项目的server中配置该站点的访问日志："></a>二. 在对应项目的<code>server</code>中配置该站点的访问日志：</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">access_log</span> /var/log/www.access main2018; <span class="comment">#使用第一步中添加的格式main2018</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="三-重启nginx"><a href="#三-重启nginx" class="headerlink" title="三. 重启nginx"></a>三. 重启nginx</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx -t <span class="comment">#判断配置正确</span></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="四-查看访问日志"><a href="#四-查看访问日志" class="headerlink" title="四. 查看访问日志"></a>四. 查看访问日志</h2><p>在服务器上执行如下指令查看最近一次访问的记录：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -n 1 /var/<span class="built_in">log</span>/www.access | awk -F <span class="string">"|"</span> <span class="string">'&#123;printf "客户端地址: %s\n访问时间和时区: %s\n客户端用户名称: %s\n请求的URI和HTTP协议: %s\nHTTP请求状态: %s\n发送给客户端文件内容大小: %s\nurl跳转来源: %s\n客户端信息: %s\nHTTP的请求端真实的IP: %s\n请求的总时间: %s\nupstream响应时间: %s\nupstream地址: %s\nupstream状态: %s\n\n",$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">客户端地址: 115.238.29.221</span><br><span class="line">访问时间和时区: -</span><br><span class="line">客户端用户名称: 26/Apr/2018:17:29:20 +0800</span><br><span class="line">请求的URI和HTTP协议: POST /api HTTP/1.1</span><br><span class="line">HTTP请求状态: 200</span><br><span class="line">发送给客户端文件内容大小: 260</span><br><span class="line">url跳转来源: -</span><br><span class="line">客户端信息: okhttp/3.8.1</span><br><span class="line">HTTP的请求端真实的IP: 115.238.29.223</span><br><span class="line">请求的总时间: 0.017</span><br><span class="line">upstream响应时间: 0.017</span><br><span class="line">upstream地址: 127.0.0.1:9000</span><br><span class="line">upstream状态: 200</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-在nginx-conf的http块中添加日志格式main2018："><span class="toc-number">1.</span> <span class="toc-text">一. 在nginx.conf的http块中添加日志格式main2018：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-在对应项目的server中配置该站点的访问日志："><span class="toc-number">2.</span> <span class="toc-text">二. 在对应项目的server中配置该站点的访问日志：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-重启nginx"><span class="toc-number">3.</span> <span class="toc-text">三. 重启nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-查看访问日志"><span class="toc-number">4.</span> <span class="toc-text">四. 查看访问日志</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=shengyayun.github.io/2018/04/26/nginx-log-format/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=shengyayun.github.io/2018/04/26/nginx-log-format/&text=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=shengyayun.github.io/2018/04/26/nginx-log-format/&title=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=shengyayun.github.io/2018/04/26/nginx-log-format/&is_video=false&description=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=nginx站点访问日志&body=Check out this article: shengyayun.github.io/2018/04/26/nginx-log-format/" target="_blank" rel="noopener"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=shengyayun.github.io/2018/04/26/nginx-log-format/&title=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=shengyayun.github.io/2018/04/26/nginx-log-format/&title=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=shengyayun.github.io/2018/04/26/nginx-log-format/&title=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=shengyayun.github.io/2018/04/26/nginx-log-format/&title=nginx站点访问日志" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=shengyayun.github.io/2018/04/26/nginx-log-format/&name=nginx站点访问日志&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 shengyayun
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?3e16ac109a038cf3fea0a2f7cca1bc6c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'shengyayun';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
