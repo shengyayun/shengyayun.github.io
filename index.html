@@ -1,397 +1,1214 @@
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="en">
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="软件研发，技术分享，学习笔记，随缘更新。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="shengyayun&#39;s Notebook">
-<meta property="og:url" content="shengyayun.github.io&#x2F;index.html">
-<meta property="og:site_name" content="shengyayun&#39;s Notebook">
-<meta property="og:description" content="软件研发，技术分享，学习笔记，随缘更新。">
-<meta property="og:locale" content="zh-CN">
-<meta name="twitter:card" content="summary">
+  <meta charset="utf-8" />
     
-    
-        
-          
-              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=16">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=192" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b?s=180">
-          
-        
-    
-    <!-- title -->
-    <title>shengyayun&#39;s Notebook</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- persian styles -->
-    
-      <link rel="stylesheet" href="/css/rtl.css">
-    
-    <!-- rss -->
-    
-    
+  <meta name="description" content="软件研发，技术分享，学习笔记，随缘更新。" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+     shengyayun&#39;s Notebook
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+
+  
+
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3e16ac109a038cf3fea0a2f7cca1bc6c";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="alternate" href="/atom.xml" title="shengyayun's Notebook" type="application/atom+xml">
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-    
-    <div class="content index py4">
-        
-          <header id="header">
-  <a href="/">
-  
-    
-      <div id="logo" style="background-image: url(https://www.gravatar.com/avatar/dbcc205f9878bf8cba23605fcab2de6b);"></div>
-    
-  
-    <div id="title">
-      <h1>shengyayun&#39;s Notebook</h1>
-    </div>
-  </a>
-  <div id="nav">
-    <ul>
-      <li class="icon">
-        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
-      </li>
-       
-        <li><a href="/">首页</a></li>
-       
-        <li><a href="/archives/">归档</a></li>
-       
-        <li><a href="/tags/">标签</a></li>
-       
-        <li><a href="/search/">搜索</a></li>
-       
-        <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
       
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/shengyayun/shengyayun.github.io"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover4.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">shengyayun&#39;s Notebook</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+<div id="main">
+  <section class="outer">
+  <article class="articles">
+    
+    
+    
+    
+    <article id="post-mysql-space" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2019/07/25/mysql-space/"
+    >mysql表占用空间分析</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/07/25/mysql-space/" class="article-date">
+  <time datetime="2019-07-25T06:12:25.000Z" itemprop="datePublished">2019-07-25</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    table_schema, <span class="comment">#库名</span></span><br><span class="line">    table_name, <span class="comment">#表名</span></span><br><span class="line">    table_comment, <span class="comment">#表注释</span></span><br><span class="line">    <span class="string">`engine`</span>, <span class="comment">#表引擎</span></span><br><span class="line">    <span class="keyword">ROUND</span>(data_length / <span class="number">1024</span> / <span class="number">1024</span>, <span class="number">2</span>) <span class="keyword">AS</span> <span class="string">'Data'</span>,  <span class="comment">#数据占用(MB)</span></span><br><span class="line">    <span class="keyword">ROUND</span>(data_free / <span class="number">1024</span> / <span class="number">1024</span>, <span class="number">2</span>) <span class="keyword">AS</span> <span class="string">'Free'</span>, <span class="comment">#碎片占用(MB)</span></span><br><span class="line">    <span class="keyword">ROUND</span>(index_length / <span class="number">1024</span> / <span class="number">1024</span>, <span class="number">2</span>) <span class="keyword">AS</span> <span class="string">'Index'</span>, <span class="comment">#索引占用(MB)</span></span><br><span class="line">    <span class="keyword">ROUND</span>((data_length + data_free + index_length) / <span class="number">1024</span> / <span class="number">1024</span>, <span class="number">2</span>) <span class="keyword">AS</span> <span class="string">'Total'</span> <span class="comment">#合计占用</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    information_schema.tables</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    table_schema <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="string">'mysql'</span> , <span class="string">'sys'</span>, <span class="string">'information_schema'</span>, <span class="string">'performance_schema'</span>)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> data_length + data_free + index_length <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-docker-stack-deploy" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2019/05/13/docker-stack-deploy/"
+    >部署Docker容器到Kubernetes</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/05/13/docker-stack-deploy/" class="article-date">
+  <time datetime="2019-05-13T12:52:25.000Z" itemprop="datePublished">2019-05-13</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p><a href="https://docs.docker.com/get-started/part5/" target="_blank" rel="noopener">Get Started, Part 5: Stacks</a><br><a href="https://docs.docker.com/compose/compose-file/" target="_blank" rel="noopener">Compose file version 3 reference</a></p>
+</blockquote>
+<h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>虽然docker默认的swarm与k8s（kubernetes）处于竞争关系，docker依然可以部署容器到k8s。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          18.09.2</span><br><span class="line">  API version:      1.39 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.10.6</span><br><span class="line">  Git commit:       6247962</span><br><span class="line">  Built:            Sun Feb 10 04:13:06 2019</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     false</span><br><span class="line"> Kubernetes:</span><br><span class="line">  Version:          v1.10.11</span><br><span class="line">  StackAPI:         v1beta2</span><br></pre></td></tr></table></figure>
+
+<h2 id="一-vi-compose-yml"><a href="#一-vi-compose-yml" class="headerlink" title="一. vi compose.yml"></a>一. vi compose.yml</h2><p>文件内容如下（保存前删除注释）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.7&quot;                                        #compose file的版本，Docker Engine版本18.06.0+支持3.7</span><br><span class="line">services:                                             #service中运行的单个容器被称为task，系统中的单个模块被称为service</span><br><span class="line">  web:</span><br><span class="line">    image: localhost:5000/hello                       #使用私有镜像localhost:5000/hello（这里必须使用仓库中的，不可以用本地的）</span><br><span class="line">    deploy:                                           #部署操作</span><br><span class="line">      replicas: 5                                     #部署5个副本</span><br><span class="line">      resources:</span><br><span class="line">        limits:</span><br><span class="line">          cpus: &quot;0.1&quot;                                 #每个副本最多使用10%的CPU时间片</span><br><span class="line">          memory: 50M                                 #每个副本最多使用50MB的RAM</span><br><span class="line">      restart_policy:</span><br><span class="line">        condition: on-failure                         #容器运行失败后自动重启</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;4000:80&quot;                                     #本地的4000端口映射到容器的80端口</span><br><span class="line">    redis:</span><br><span class="line">      image: redis                                    #docker hub上的redis镜像</span><br><span class="line">      ports:</span><br><span class="line">        - &quot;6379:6379&quot;                                 #本地的6379端口映射到容器的6379端口</span><br><span class="line">      volumes:</span><br><span class="line">        - &quot;/home/docker/data:/data&quot;                   #容器的/data目录挂载到本地的/home/docker/data目录（redis会将日志文件存储到/data目录）</span><br><span class="line">      deploy:</span><br><span class="line">        placement:</span><br><span class="line">          constraints: [node.role == manager]         #限制本service只在manager节点执行</span><br><span class="line">      command: redis-server --appendonly yes          #启动redis-server，同时指定数据持久化策略：AOF模式</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-docker-stack-deploy"><a href="#二-docker-stack-deploy" class="headerlink" title="二. docker stack deploy"></a>二. docker stack deploy</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># service组成的完整的功能模块（甚至是系统）被称为stack。指定orchestrator为k8s，通过上一步保存的yml文件，生成名为hello的stack。</span></span><br><span class="line">docker stack deploy --orchestrator=kubernetes -c compose.yml hello</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看k8s的全部resources</span></span><br><span class="line">kubectl get all</span><br><span class="line"><span class="comment"># 查看docker的全部stack</span></span><br><span class="line">docker stack ls</span><br></pre></td></tr></table></figure>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kubernetes/" rel="tag">kubernetes</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-docker-registry" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2019/05/04/docker-registry/"
+    >创建Docker私有仓库</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/05/04/docker-registry/" class="article-date">
+  <time datetime="2019-05-04T02:31:37.000Z" itemprop="datePublished">2019-05-04</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p><a href="https://docs.docker.com/registry/deploying/" target="_blank" rel="noopener">Deploy a registry server</a><br><a href="https://docs.docker.com/storage/volumes/" target="_blank" rel="noopener">Use volumes</a><br><a href="https://docs.docker.com/storage/bind-mounts/" target="_blank" rel="noopener">Use bind mounts</a><br><a href="https://docs.docker.com/registry/garbage-collection/" target="_blank" rel="noopener">Garbage collection</a><br><a href="https://docs.docker.com/registry/spec/api/" target="_blank" rel="noopener">HTTP API V2</a><br><a href="https://docs.docker.com/glossary/?term=repository" target="_blank" rel="noopener">Definition of: repository</a></p>
+</blockquote>
+<h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>本文介绍如何在本地部署docker私有仓库，涉及到registry镜像（registry:2）、volume与bind（bind mount）、仓库的http api、仓库的垃圾回收等知识点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          18.09.2</span><br><span class="line">  API version:      1.39 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.10.6</span><br><span class="line">  Git commit:       6247962</span><br><span class="line">  Built:            Sun Feb 10 04:13:06 2019</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     false</span><br><span class="line"> Kubernetes:</span><br><span class="line">  Version:          v1.10.11</span><br><span class="line">  StackAPI:         v1beta2</span><br></pre></td></tr></table></figure>
+
+<h2 id="一-创建一个volume"><a href="#一-创建一个volume" class="headerlink" title="一. 创建一个volume"></a>一. 创建一个volume</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建一个名为registry-vol的卷</span></span><br><span class="line">docker volume create registry-vol</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行以下指令，可以看到有一条VOLUME NAME为registry-vol的记录</span></span><br><span class="line">docker volume ls</span><br></pre></td></tr></table></figure>
+<p>与bind直接使用宿主的文件系统不同，volume由docker直接生成与管理，它跨系统、跨平台、易于备份与迁移。</p>
+<h2 id="二-创建私有仓库"><a href="#二-创建私有仓库" class="headerlink" title="二. 创建私有仓库"></a>二. 创建私有仓库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#从docker hub拉取私有仓库的镜像</span></span><br><span class="line">docker pull registry:2</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建容器</span></span><br><span class="line"><span class="comment"># -d 在后台运行容器</span></span><br><span class="line"><span class="comment"># -p 5000:5000 将本地的5000(冒号左边)端口映射到容器的5000(冒号右边)端口</span></span><br><span class="line"><span class="comment"># --mount src=registry-vol,dst=/var/lib/registry 将名为registry-vol的volume映射到容器的/var/lib/registry目录（通过volume的方式进行数据持久化）</span></span><br><span class="line"><span class="comment"># --restart=always 容器自动重启</span></span><br><span class="line"><span class="comment"># -e REGISTRY_STORAGE_DELETE_ENABLED=true 设置环境变量，使得私有仓库中的镜像可以被删除。</span></span><br><span class="line"><span class="comment"># registry:2 image:tag</span></span><br><span class="line">docker run -d -p 5000:5000 --mount <span class="built_in">type</span>=volume,src=registry-vol,dst=/var/lib/registry --restart=always -e REGISTRY_STORAGE_DELETE_ENABLED=<span class="literal">true</span> registry:2</span><br></pre></td></tr></table></figure>
+<p>这里额外提供一个案例：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建容器</span></span><br><span class="line"><span class="comment"># --mount type=bind,src=/mnt/registry,dst=/var/lib/registry 将本地的/mnt/registry映射到容器的/var/lib/registry目录（通过bind mount的方式进行数据持久化）</span></span><br><span class="line"><span class="comment"># -v `pwd`/config.yml:/etc/docker/registry/config.yml 将本地当前目录的config.yml文件映射到容器的/etc/docker/registry/config.yml。</span></span><br><span class="line">docker run -d -p 5000:5000 --mount <span class="built_in">type</span>=<span class="built_in">bind</span>,src=/mnt/registry,dst=/var/lib/registry --restart=always -v `<span class="built_in">pwd</span>`/config.yml:/etc/docker/registry/config.yml registry:2</span><br></pre></td></tr></table></figure>
+<p>需要注意的是：</p>
+<ol>
+<li>第一个案例中的<code>-e REGISTRY_STORAGE_DELETE_ENABLED=true</code>，在第二个案例中可以通过在配置文件中添加<code>registry:storage:delete:enabled:true</code>来替代。</li>
+<li>虽然-v的功能和–mount相似，但推荐使用较为冗长的–mount，因为它简单易懂。</li>
+</ol>
+<p>至此，私有仓库已经创建成功，我们可以通过docker提供的api确认一下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#访问私有仓库的接口</span></span><br><span class="line">curl http://localhost:5000/v2</span><br><span class="line"><span class="comment">#输出结果为&#123;&#125;，说明私有仓库已经在正常运行</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三-推送镜像到私有仓库"><a href="#三-推送镜像到私有仓库" class="headerlink" title="三. 推送镜像到私有仓库"></a>三. 推送镜像到私有仓库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将本地镜像hello:latest（该镜像来自上个笔记）添加一个标签，其中localhost:5000对应私有仓库地址</span></span><br><span class="line">docker tag hello localhost:5000/hello</span><br><span class="line"><span class="comment">#docker根据tag，将镜像提交到私有仓库localhost:5000</span></span><br><span class="line">docker push localhost:5000/hello</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过docker的http api查看存储的repository列表</span></span><br><span class="line">curl http://localhost:5000/v2/_catalog</span><br><span class="line"><span class="comment">#输出结果为：&#123;"repositories":["hello"]&#125;，说明已经提交成功。现在即使删除本地的镜像，也可以通过`docker pull localhost:5000/hello`从私有仓库重新获取。</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>repository指的是一组Docker镜像。 repository可以通过推送到仓库服务来分享。同一个repository中的不同镜像可以通过标签来归类。</p>
+</blockquote>
+<p>hello镜像推送成功后，私有仓库会生成一个名为hello的repository。这个repository会存储各个tag的hello镜像，例如：hello:v1、hello:v2。</p>
+<h2 id="四-搭建私有仓库的管理后台"><a href="#四-搭建私有仓库的管理后台" class="headerlink" title="四. 搭建私有仓库的管理后台"></a>四. 搭建私有仓库的管理后台</h2><p>对于私有仓库，docker只提供了http api的接口文档，它并未提供官方的管理后台。为了方便学习，采用第三方提供的<a href="https://github.com/Joxit/docker-registry-ui" target="_blank" rel="noopener">Joxit/docker-registry-ui</a>。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#拉取镜像</span></span><br><span class="line">docker pull joxit/docker-registry-ui:static</span><br><span class="line"><span class="comment">#创建容器</span></span><br><span class="line"><span class="comment"># -p 5050:80 将本地的5050端口映射到容器的80端口</span></span><br><span class="line"><span class="comment"># -e REGISTRY_URL=http://172.17.0.1:5000 通过环境变量设置容器访问的仓库地址为 http://172.17.0.1:5000</span></span><br><span class="line"><span class="comment"># -e DELETE_IMAGES=true 通过环境变量设置镜像可删除</span></span><br><span class="line"><span class="comment"># -e REGISTRY_TITLE="My registry" 通过环境变量设置后台的title</span></span><br><span class="line">docker run -d -p 5050:80 -e REGISTRY_URL=http://172.17.0.1:5000 -e DELETE_IMAGES=<span class="literal">true</span> -e REGISTRY_TITLE=<span class="string">"My registry"</span> joxit/docker-registry-ui:static</span><br></pre></td></tr></table></figure>
+<p>这里的REGISTRY_UR并不是 <a href="http://localhost:5000" target="_blank" rel="noopener">http://localhost:5000</a> ，因为容器和本机的localhost并不等价。通过以下方式取得在对应的docker网络中本机的局域网地址：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#后台容器采用默认的bridge网络， 查询该网络的详细属性</span></span><br><span class="line">docker network inspect bridge</span><br><span class="line"><span class="comment">#输出结果中发现IPAM.Config.Gateway为172.17.0.1，这就是本机在bridge网络中的局域网地址了。</span></span><br></pre></td></tr></table></figure>
+<p>通过浏览器访问 <a href="http://localhost:5050" target="_blank" rel="noopener">http://localhost:5050</a> ，可以通过管理后台对私有仓库进行管理了。</p>
+<h2 id="五-删除私有仓库中的hello"><a href="#五-删除私有仓库中的hello" class="headerlink" title="五. 删除私有仓库中的hello"></a>五. 删除私有仓库中的hello</h2><p>通过后台页面，找到删除功能并不复杂。但是即使删除成功，后台的repository列表中依然存在hello（虽然再也无法拉取镜像）。这并不是管理后台的问题，下面通过接口确认：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#通过docker的http api查看存储的repository列表</span></span><br><span class="line">curl http://localhost:5000/v2/_catalog</span><br><span class="line"><span class="comment">#输出结果为：&#123;"repositories":["hello"]&#125;，hello的repository依然存在</span></span><br></pre></td></tr></table></figure>
+<p>查阅资料，发现官方指出：</p>
+<ol>
+<li>目前的api只能删除repository中的镜像，而不能删除repository本身。</li>
+<li>私有仓库提供的api只能删除manifests（清单）和layers（层）。所以repository一旦被创建，将无法通过api将其彻底删除。</li>
+<li>api中的删除操作会移除对目标的引用，使得其可以被垃圾回收。同时让它无法被api访问。</li>
+<li>垃圾回收会清理不被任何manifests（清单）引用的数据块，数据块包含layers（层）或manifests（清单）。当manifests（清单）被删除时，它指向的layers（层）中没被其他清单引用的也会被删除。</li>
+</ol>
+<p>也就是说之前通过api删除的，只是repository下的hello:latest镜像，而repository本身依然存在。<br>想要删除repository，需要通过一种stop-the-world（清理期间上传中的镜像可能会被误删）的方式：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查找私有仓库的容器ID</span></span><br><span class="line">docker container ls | grep registry:2</span><br><span class="line"><span class="comment">#容器执行指令</span></span><br><span class="line"><span class="comment"># exec 让容器执行指令</span></span><br><span class="line"><span class="comment"># -it i为交互，t为分配一个冒充的tty</span></span><br><span class="line"><span class="comment"># 74252955fbd9 私有仓库的容器ID，替换为实际ID</span></span><br><span class="line"><span class="comment"># /bin/sh 让容器执行的指令</span></span><br><span class="line">docker <span class="built_in">exec</span> -it 74252955fbd9 /bin/sh <span class="comment">#执行后可以直接通过shell操作容器了</span></span><br><span class="line"><span class="comment">#进行垃圾回收</span></span><br><span class="line"><span class="comment"># 垃圾回收会清理不被任何manifests（清单）引用的数据块，数据块包含layers（层）或manifests（清单）</span></span><br><span class="line"><span class="comment"># 当manifests（清单）被删除时，它指向的layers（层）中没被其他清单引用的也会被删除</span></span><br><span class="line">/bin/registry garbage-collect /etc/docker/registry/config.yml</span><br><span class="line"><span class="comment">#删除hello的repository</span></span><br><span class="line">rm -rf /var/lib/registry/docker/registry/v2/repositories/hello</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过docker的http api查看存储的repository列表</span></span><br><span class="line">curl http://localhost:5000/v2/_catalog</span><br><span class="line"><span class="comment">#输出结果为：&#123;"repositories":[]&#125;，说明已经hello已经被彻底删除</span></span><br></pre></td></tr></table></figure>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-docker-build-image" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2019/04/29/docker-build-image/"
+    >通过Dockerfile生成镜像</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/04/29/docker-build-image/" class="article-date">
+  <time datetime="2019-04-29T12:54:48.000Z" itemprop="datePublished">2019-04-29</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p><a href="https://docs.docker.com/get-started/part2/" target="_blank" rel="noopener">Get Started, Part 2: Containers</a><br><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" target="_blank" rel="noopener">Best practices for writing Dockerfiles</a></p>
+</blockquote>
+<h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>这里将通过一个简单的场景来学习Dockerfile的使用：制作一个安装了openresty的centos的镜像（image）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          18.09.2</span><br><span class="line">  API version:      1.39 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.10.6</span><br><span class="line">  Git commit:       6247962</span><br><span class="line">  Built:            Sun Feb 10 04:13:06 2019</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     false</span><br><span class="line"> Kubernetes:</span><br><span class="line">  Version:          v1.10.11</span><br><span class="line">  StackAPI:         v1beta2</span><br></pre></td></tr></table></figure>
+
+<h2 id="一-创建一个工作目录"><a href="#一-创建一个工作目录" class="headerlink" title="一. 创建一个工作目录"></a>一. 创建一个工作目录</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 后续这个目录将存放Dockerfile和entrypoint.sh</span></span><br><span class="line">mkdir hello</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-在工作目录中创建一个Dockerfile文件"><a href="#二-在工作目录中创建一个Dockerfile文件" class="headerlink" title="二. 在工作目录中创建一个Dockerfile文件"></a>二. 在工作目录中创建一个Dockerfile文件</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定基础镜像，并且必须是第一条指令（如果不需要基础镜像，那么替换为 FROM scratch）</span></span><br><span class="line"><span class="comment"># 这里的centos是镜像名，7是标签。这里对应系统centos 7</span></span><br><span class="line">FROM centos:7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 容器的工作路径，对后续的RUN, CMD, ENTRYPOINT, COPY, ADD生效（如果对应的目录不存在则会创建，可以重复设置）</span></span><br><span class="line"><span class="comment"># 这里会在容器中创建一个/app文件夹，下面的对应操作会在/app中进行</span></span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从本地拷贝文件到容器</span></span><br><span class="line"><span class="comment"># 这里会把本地的demo目录内的全部文件拷贝到容器的/app目录下（./指当前目录，而当前目录通过WORKDIR定义）</span></span><br><span class="line">COPY * ./</span><br><span class="line"></span><br><span class="line"><span class="comment"># 容器在build时执行指令</span></span><br><span class="line">RUN yum install -y lsof git</span><br><span class="line">RUN yum install -y yum-utils</span><br><span class="line">RUN yum-config-manager -y --add-repo https://openresty.org/package/centos/openresty.repo</span><br><span class="line">RUN yum install -y openresty</span><br><span class="line"></span><br><span class="line"><span class="comment"># 容器启动时执行指令，CMD命令的功能类似，但主要区别在于CMD可被dock run的COMMAND参数覆盖，而ENTRYPOINT不会</span></span><br><span class="line"><span class="comment"># 如果CMD或ENTRYPOINT配置了多条，且CMD指令不是完整的可执行命令，那么CMD的内容将成为ENTRYPOINT的参数。反之仅最后一条生效。</span></span><br><span class="line"><span class="comment"># 当容器启动时会执行/app/entrypoint.sh文件（build的时候不会执行），该文件在上面的COPY操作中被docker从本地的工作目录拷贝到了容器的/app目录</span></span><br><span class="line">ENTRYPOINT ./entrypoint.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对外开放端口</span></span><br><span class="line"><span class="comment"># 若果不将80端口对外暴露，容器外将无法访问容器的80端口</span></span><br><span class="line">EXPOSE 80</span><br></pre></td></tr></table></figure>
+
+<h2 id="三-在工作目录中创建一个entrypoint-sh文件"><a href="#三-在工作目录中创建一个entrypoint-sh文件" class="headerlink" title="三. 在工作目录中创建一个entrypoint.sh文件"></a>三. 在工作目录中创建一个entrypoint.sh文件</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动openresty服务</span></span><br><span class="line">openresty</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker会将没有前台守护进程的容器直接关闭，所以这里通过本指令阻塞脚本的执行</span></span><br><span class="line">tail -f /dev/null</span><br></pre></td></tr></table></figure>
+<p>文件生成完成后，记得还要通过<code>chmod +x entrypoint.sh</code>给脚本加上执行权限，否则容器启动时将无法执行脚本。</p>
+<h2 id="四-在工作目录下build镜像"><a href="#四-在工作目录下build镜像" class="headerlink" title="四. 在工作目录下build镜像"></a>四. 在工作目录下build镜像</h2><blockquote>
+<p>Usage:    docker build [OPTIONS] PATH | URL | -</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 待生成镜像的name为hello，tag为缺省值latest，路径为.（当前工作目录）</span></span><br><span class="line">docker build -t hello .</span><br><span class="line"><span class="comment"># 指令执行完成后，控制台输出镜像完整的ID</span></span><br></pre></td></tr></table></figure>
+<p>执行<code>docker image ls</code>，docker会打印出本地存储的全部镜像，其中REPOSITORY为hello，TAG为latest的记录对应刚创建的镜像。</p>
+<h2 id="五-创建容器"><a href="#五-创建容器" class="headerlink" title="五. 创建容器"></a>五. 创建容器</h2><blockquote>
+<p>Usage:    docker run [OPTIONS] IMAGE [COMMAND] [ARG…]</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -d 该容器在后台执行</span></span><br><span class="line"><span class="comment"># -p 4000:80 将容器的80端口映射到本地的4000端口（通过localhost:4000访问容器的openresty的80端口）。</span></span><br><span class="line"><span class="comment"># hello 使用镜像hello</span></span><br><span class="line">docker run -d -p 4000:80 hello</span><br><span class="line"><span class="comment"># 指令执行完成后，控制台输出容器完整的ID</span></span><br></pre></td></tr></table></figure>
+<p>执行<code>docker container ls</code>，docker会打印出本地执行中的全部容器，其中IMAGE为hello的记录对应刚启动的容器。<br>打开浏览器访问<code>http://localhost:4000</code>，可以看到openrestry的默认主页，至此镜像及其对应的容器已创建完成。</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-raft" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2019/04/22/raft/"
+    >Raft算法分析</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/04/22/raft/" class="article-date">
+  <time datetime="2019-04-22T14:28:26.000Z" itemprop="datePublished">2019-04-22</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>Raft算法用于保证分布式系统的强一致性，被目前知名的etcd所采用。</p>
+<h2 id="一-心跳"><a href="#一-心跳" class="headerlink" title="一. 心跳"></a>一. 心跳</h2><p>集群中每个节点都需要定期向其他节点发送心跳包，如果超过一半的节点超过一定时间(阈值)未收到该节点的心跳包，那么认定该节点已下线。</p>
+<img  src=http://www.plantuml.com/plantuml/svg/Uz7LzBnffwE2ZQwTmWimsybAuUd-vXVRDtFbvPUaAXHbfcUK08Ncxtgogo-ZfAJWvTJzB_RFUzQtzFcibkAIejJ4tESRTp-Tr_soOTRBnibSBp0CT8ORY2ddWaVE5KtE2O-PJdZCTC9ZfZCUVSJAePlfWaqE0000>
+
+
+<h2 id="二-选举"><a href="#二-选举" class="headerlink" title="二. 选举"></a>二. 选举</h2><p>集群中节点角色可为Leader、Follower或Candidate其中一个。当Follower在一定时间内没有收到来自Leader的心跳，会将自己角色变更为Candidate，然后等待一段随机的时间后，发起选举。</p>
+<img  src=http://www.plantuml.com/plantuml/svg/dLPDKzfG55sJNy6uqd5STEl26MljgZ_13JDagZCCT2ZJkkIZV8DW5R0OeBNWM9GlYn2Co8zfxajOzI_qlhmG0m6jBc0Wxxvpppltt7Upw_RuUBld4--rgucW4XnisjVjxtY7a_Skov94XCgwUuNRdOrwZL5lFIwNvpFlvHmkdvsKQcgqpZOgnIym2gdztv0AgxqmAVGusmHyRMFV1649cvjeo-5sxZaTFfwpkJoU3vpDDbbRsp25AOqut8V7nGmHRX5iNEXYf8RdtNk_wyE8SM04uJHKYx9ODq0Xcy9eo1ogD_snFowBzuiIi1ZbienXV-zIkZohg-xPFAIL8LS_p90OFWuDvRkYslp5zgs-mbsQSiSzYBLH07KKXNI2vDge7qkwZCgGv1KA2_tEYdfJ9h4iHT8WyJSaAWXY9Rjba6MXQgjFEa4QEYs7QL4M9VKyWFaWUqc4AwJFLf4BuokB1xAOGE6842Uv67k8gqJmatoR56emAj2_twEGwJ-mshAlJMcejceMu3GvQJ4OF1n9VbMaaeKhX7kob6Su85mWHLq5eQv8HwIaKGc58N8ZYqbsTlasWf3ut2Y1FAX0kqEpnVrg-mYNbbWr8NAjr0DBSyLyir3CoVh-z17Xj0pLzCJHSn2tdq3Sdj4C_DzeuAW4ZHDwp5oRf9ie6pHJ9DTzH3Dj7yD1wq7sqAmYoMJb-rFcBOgQRpzUw1ttJAcLkpoM6jERKMMfHXfLY5L9lc7ER_16zI5xpgZ_yMkdVghfRRph8s_7Ih-qLQ3QKRkrPxRA0lzgo2yqodz3FTSX-Z4r5rEV3oFG6f3yW1MFd7PfTSLZLW73DWy4fcoZfo2DdzXe35aM6mnMJsbkC5dqgyEcqMPOqnqtd0T9MT23ZKutsXoVK3Znc7aQSHWdmoIK76E1lYM976Egr2uUSunbQaqfk-3sOxSepOTpA7ghpnVDSBhqewXoaKG1cFaMpJb4KAGOQPmP8sJ-37aSPU7PZ5bhwV5CImqDgR8Q91nKhAZBnbFZneNCoOf-8Ku0p5rireP9phkTdFP5Fzh4Dq0dZNy0pHoENYfLu0nlGFFGdpVpEMtyMTDIBsYsD0GqzjEN4tO6w5-pUv-RezZcb69QCQrfaEV2DudfIbfYA3vj3r7adgoNhja_>
+
+
+<h2 id="三-强一致"><a href="#三-强一致" class="headerlink" title="三. 强一致"></a>三. 强一致</h2><p>假设集群中最多n台机器发生故障，那么最少需要2n+1个节点。比起在拜占庭问题中最少需要3n+1个节点，raft协议的优势在于节点不存在欺骗问题。</p>
+<img  src=http://www.plantuml.com/plantuml/svg/bPBFIiD04CRlFaNeIG--W0V1YwVUlNWH35Ke3PI2rneKGqX8n9fAJKaBJV6GHW-IDar2NcPdDZTVmPMDQFD7wctPcT_CDzyC7RoWiXJs3uN6iTHkIrTYDrDbAeUx9FBs6iA1WC_lQBtXWquIUwSwYT5DyUpy-vT1MUA1SPz36x5oxibH4uSkfCDIOfqaC3LSk3dKaNgYqBriNVHOX4vzaewpu3PBxyYg3xfAHpUS_WsXOeBgr4rJbbZ1RhIjB4JY4IWpj1QSPefmx38vl0nxa2X2sy6dLp3dNr7R-OYrqmw40LaDS1AYxgFjeJT5moJhsGyQMs0iyzfpcIIFMPg0EgbniJ0BtoTL0-nVextUslGYjxLv1J3txtzj-IM1hp7wZywKNtCLzGa0>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raft/" rel="tag">raft</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-voltdb-deploy" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2018/09/29/voltdb-deploy/"
+    >voltdb的部署</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2018/09/29/voltdb-deploy/" class="article-date">
+  <time datetime="2018-09-29T08:04:52.000Z" itemprop="datePublished">2018-09-29</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>Voltdb作为分布式的内存数据库，企业版比社区版主要多提供了命令日志(事务级别的持久化日志)、不停机的弹性扩容、用于灾难恢复的数据库备份、跨数据中心的备份。</p>
+<h2 id="一-下载安装"><a href="#一-下载安装" class="headerlink" title="一. 下载安装"></a>一. 下载安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://downloads.voltdb.com/technologies/server/voltdb-latest.tar.gz</span><br><span class="line">tar -zxvf voltdb-latest.tar.gz</span><br><span class="line">mv voltdb-community-7.8.2 /usr/<span class="built_in">local</span>/voltdb</span><br><span class="line">mkdir /data/voltdb <span class="comment">#这个目录存放voltdb的数据</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二-系统配置"><a href="#二-系统配置" class="headerlink" title="二. 系统配置"></a>二. 系统配置</h2><ol>
+<li>voltdb不支持大页内存，终端执行以下指令，同时将它们写入<code>/etc/rc.local</code>文件：<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> never &gt; /sys/kernel/mm/transparent_hugepage/enabled</span><br><span class="line"><span class="built_in">echo</span> never &gt; /sys/kernel/mm/transparent_hugepage/defrag</span><br></pre></td></tr></table></figure></li>
+<li>将voltdb的可执行文件加入PATH：<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#更新Path</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'PATH=/usr/local/voltdb/bin:$PATH'</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="comment">#终端执行以下指令立刻执行变更：</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="三-初始化和运行"><a href="#三-初始化和运行" class="headerlink" title="三. 初始化和运行"></a>三. 初始化和运行</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">voltdb init --dir /data/voltdb/ <span class="comment">#如果以前启动过，需要强制初始化，加上 --force</span></span><br><span class="line">voltdb start --dir /data/voltdb/</span><br></pre></td></tr></table></figure>
+
+<h2 id="四-测试数据插入"><a href="#四-测试数据插入" class="headerlink" title="四. 测试数据插入"></a>四. 测试数据插入</h2><p>1 . 终端执行<code>sqlcmd</code>进入sql终端：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table <span class="built_in">test</span>(id int); <span class="comment">#创建测试表</span></span><br><span class="line">create procedure ping as insert into <span class="built_in">test</span>(id) values(?); <span class="comment">#创建存储过程</span></span><br></pre></td></tr></table></figure>
+<p>2 . 在终端通过http执行存储过程：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -d <span class="string">"Procedure=ping&amp;Parameters=%5B0%5D"</span> <span class="string">"http://localhost:8080/api/1.0/"</span></span><br><span class="line"><span class="comment">#其中%5B0%5D未转码前是`[0]`，所以这里等同于 `call ping (0)`</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="五-常用指令"><a href="#五-常用指令" class="headerlink" title="五. 常用指令"></a>五. 常用指令</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">voltadmin save <span class="comment">#立刻生成快照</span></span><br><span class="line">voltadmin shutdown <span class="comment">#停止集群(不要直接停止voltdb进程，应该使用voltadmin)</span></span><br><span class="line">voltadmin shutdown —save <span class="comment">#停止集群并生成快照</span></span><br><span class="line">voltadmin pause <span class="comment">#停止客户端服务，进入维护模式</span></span><br><span class="line">voltadmin resume <span class="comment">#退出维护模式</span></span><br><span class="line">voltdb start --pause</span><br><span class="line">voltadmin save --blocking &#123;path&#125; &#123;file-prefix&#125; <span class="comment">#在path目录下生成file-prefix为前缀的备份文件</span></span><br><span class="line">voltadmin restore &#123;path&#125; &#123;file-prefix&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="六-使用须知"><a href="#六-使用须知" class="headerlink" title="六. 使用须知"></a>六. 使用须知</h2><ol>
+<li>所有节点的内存大小与核数应保持一致。</li>
+<li>每个节点的默认分区数为8，推荐分区数为：cpu核数 × 0.75 (非超线程处理器)。</li>
+<li>每个分区有且只有一个线程读写，不存在锁冲突。分区越多并发越高，自然性能也越高。</li>
+<li>一个表只有一个分区列，每个表通过hash分区列，把每行数据分布到不同的分区。</li>
+<li>合理的分区列直接决定该表的增删改查性能。</li>
+<li>如果分区表存在主键，那么主键中必须包含分区列。</li>
+<li>分区列不能为空，且必须为<code>TINYINT</code>、<code>SMALLINT</code>、 <code>INTEGER</code>、<code>BIGINT</code>、<code>VARCHAR</code>类型。</li>
+<li>没有分区列的表是复制表，全部分区都会保存一份。所以虽然插入与存储成本高，但是查询成本低，适合更新较少但查询较多的小表。</li>
+<li>存在数据的列无法添加唯一、假定唯一、主键约束。</li>
+<li>被存储过程引用的表无法直接删除，需先删除对应存储过程。被索引和视图引用的表也无法直接删除，但是可以用<code>DROP TABLE 表名 IF EXISTS CASCADE</code>来级联删除。</li>
+<li>K-Safe的值代表可以保证数据不丢失的最小可以同时发生故障的服务器数。假设为K-Safe值为<code>n</code>，节点数为<code>a</code>，每个节点分区数为<code>b</code>，那么一条数据有<code>n+1</code>个拷贝，每<code>a×b/(n+1)</code>个分区存有一份完整的数据。</li>
+<li>集群间每台服务器需开启NTP保证节点间时间差异不超过200ms。</li>
+<li>存储过程返回结果不能超过50MB。 </li>
+</ol>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/voltdb/" rel="tag">voltdb</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-ssh-disconnect" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2018/09/29/ssh-disconnect/"
+    >SSH自动断开的解决方法</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2018/09/29/ssh-disconnect/" class="article-date">
+  <time datetime="2018-09-29T08:01:25.000Z" itemprop="datePublished">2018-09-29</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>在服务端(centos)执行以下指令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"ClientAliveInterval 60"</span> &gt;&gt; /etc/ssh/sshd_config  </span><br><span class="line"><span class="built_in">echo</span> <span class="string">"ClientAliveCountMax 1"</span> &gt;&gt; /etc/ssh/sshd_config  </span><br><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-maven-manifest" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2018/05/26/maven-manifest/"
+    >maven打包时在META-INF/MANIFEST.MF中添加主清单属性</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2018/05/26/maven-manifest/" class="article-date">
+  <time datetime="2018-05-26T14:16:08.000Z" itemprop="datePublished">2018-05-26</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题:"></a>发现问题:</h2><p>默认使用<code>mvn clean package</code>生成的jar文件中的 <strong>MANIFEST.MF</strong> 是这样的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Manifest-Version: 1.0</span><br><span class="line">Created-By: Apache Maven 3.3.9</span><br><span class="line">Built-By: shengyayun</span><br><span class="line">Build-Jdk: 10.0.1</span><br></pre></td></tr></table></figure>
+<p>这种jar文件执行的时候会返回 <strong>xxx.jar中没有主清单属性</strong>。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法:"></a>解决方法:</h2><p>修改 <strong>pom.xml</strong>文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-jar-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">archive</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">Main-Class</span>&gt;</span>com.shengyayun.App<span class="tag">&lt;/<span class="name">Main-Class</span>&gt;</span> #划重点</span><br><span class="line">            <span class="tag">&lt;/<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>现在重新打包生成的MANIFEST.MF中多了一行<code>Main-Class: com.shengyayun.App</code></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/manifest/" rel="tag">manifest</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/" rel="tag">maven</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-nginx-log-format" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2018/04/26/nginx-log-format/"
+    >nginx站点访问日志</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2018/04/26/nginx-log-format/" class="article-date">
+  <time datetime="2018-04-26T11:42:30.000Z" itemprop="datePublished">2018-04-26</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="一-在nginx-conf的http块中添加日志格式main2018："><a href="#一-在nginx-conf的http块中添加日志格式main2018：" class="headerlink" title="一. 在nginx.conf的http块中添加日志格式main2018："></a>一. 在nginx.conf的<code>http</code>块中添加日志格式<code>main2018</code>：</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">log_format</span> main2018 <span class="string">'<span class="variable">$remote_addr</span>|<span class="variable">$remote_user</span>|<span class="variable">$time_local</span>|<span class="variable">$request</span>|<span class="variable">$status</span>|<span class="variable">$body_bytes_sent</span>|<span class="variable">$http_referer</span>|<span class="variable">$http_user_agent</span>|<span class="variable">$http_x_forwarded_for</span>|<span class="variable">$request_time</span>|<span class="variable">$upstream_response_time</span>|<span class="variable">$upstream_addr</span>|<span class="variable">$upstream_status</span>'</span>;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="二-在对应项目的server中配置该站点的访问日志："><a href="#二-在对应项目的server中配置该站点的访问日志：" class="headerlink" title="二. 在对应项目的server中配置该站点的访问日志："></a>二. 在对应项目的<code>server</code>中配置该站点的访问日志：</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">access_log</span> /var/log/www.access main2018; <span class="comment">#使用第一步中添加的格式main2018</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="三-重启nginx"><a href="#三-重启nginx" class="headerlink" title="三. 重启nginx"></a>三. 重启nginx</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx -t <span class="comment">#判断配置正确</span></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="四-查看访问日志"><a href="#四-查看访问日志" class="headerlink" title="四. 查看访问日志"></a>四. 查看访问日志</h2><p>在服务器上执行如下指令查看最近一次访问的记录：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -n 1 /var/<span class="built_in">log</span>/www.access | awk -F <span class="string">"|"</span> <span class="string">'&#123;printf "客户端地址: %s\n访问时间和时区: %s\n客户端用户名称: %s\n请求的URI和HTTP协议: %s\nHTTP请求状态: %s\n发送给客户端文件内容大小: %s\nurl跳转来源: %s\n客户端信息: %s\nHTTP的请求端真实的IP: %s\n请求的总时间: %s\nupstream响应时间: %s\nupstream地址: %s\nupstream状态: %s\n\n",$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">客户端地址: 115.238.29.221</span><br><span class="line">访问时间和时区: -</span><br><span class="line">客户端用户名称: 26/Apr/2018:17:29:20 +0800</span><br><span class="line">请求的URI和HTTP协议: POST /api HTTP/1.1</span><br><span class="line">HTTP请求状态: 200</span><br><span class="line">发送给客户端文件内容大小: 260</span><br><span class="line">url跳转来源: -</span><br><span class="line">客户端信息: okhttp/3.8.1</span><br><span class="line">HTTP的请求端真实的IP: 115.238.29.223</span><br><span class="line">请求的总时间: 0.017</span><br><span class="line">upstream响应时间: 0.017</span><br><span class="line">upstream地址: 127.0.0.1:9000</span><br><span class="line">upstream状态: 200</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-mongodb-replica-sets" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2017/12/10/mongodb-replica-sets/"
+    >mongodb的Replica Sets</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2017/12/10/mongodb-replica-sets/" class="article-date">
+  <time datetime="2017-12-10T07:18:47.000Z" itemprop="datePublished">2017-12-10</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><ol>
+<li>我使用了3台服务器来部署Replica Sets，分别为主节点ma、从节点mb、仲裁节点mc(这里的ma、mb、mc已经被我配置进了hosts，可以直接被解析为ip)。</li>
+<li>其中主节点负责写与实时读，从节点负责非实时读（主从数据同步存在延迟）。</li>
+<li>仲裁节点不提供数据读写支持，但会在主节点停止工作后将从节点升级为主节点。</li>
+</ol>
+<h2 id="一-安装"><a href="#一-安装" class="headerlink" title="一. 安装"></a>一. 安装</h2><p>新建文件<strong>/etc/yum.repos.d/mongodb-enterprise.repo</strong>，内容如下：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mongodb-enterprise]</span></span><br><span class="line"><span class="attr">name</span>=MongoDB Enterprise Repository</span><br><span class="line"><span class="attr">baseurl</span>=https://repo.mongodb.com/yum/redhat/<span class="variable">$releasever</span>/mongodb-enterprise/<span class="number">3.4</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">gpgkey</span>=https://www.mongodb.org/static/pgp/server-<span class="number">3.4</span>.asc</span><br></pre></td></tr></table></figure>
+<p>然后直接通过yum安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mongodb-enterprise</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-编辑配置文件"><a href="#二-编辑配置文件" class="headerlink" title="二. 编辑配置文件"></a>二. 编辑配置文件</h2><p>执行<code>vi /etc/mongod.conf</code>，配置内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#monogodb</span><br><span class="line"></span><br><span class="line">systemLog:</span><br><span class="line">  destination: file #日志输出目的地</span><br><span class="line">  logAppend: true #当mongod/mongos重启后，是否在现有日志的尾部继续添加日志</span><br><span class="line">  path: /var/log/mongodb/mongod.log #日志路径</span><br><span class="line"></span><br><span class="line">storage:</span><br><span class="line">  dbPath: /var/lib/mongo #mongod进程存储数据目录</span><br><span class="line">  indexBuildRetry: true #当构建索引时mongod意外关闭，那么再次启动重新构建索引</span><br><span class="line">  directoryPerDB: true #不同DB的数据存储在不同的目录中</span><br><span class="line">  journal:</span><br><span class="line">    enabled: true #开启journal日志持久存储，journal日志用来数据恢复</span><br><span class="line"></span><br><span class="line">processManagement:</span><br><span class="line">  fork: true #主进程fork出一个子进程在后台执行</span><br><span class="line">  pidFilePath: /var/run/mongodb/mongod.pid #pid文件地址</span><br><span class="line"></span><br><span class="line">net:</span><br><span class="line">  port: 27017  #默认端口</span><br><span class="line"></span><br><span class="line">security:</span><br><span class="line">  authorization: enabled #是否开启用户访问控制</span><br><span class="line">  clusterAuthMode: keyFile #集群中members之间的认证模式</span><br><span class="line">  keyFile: /etc/mongodb-keyfile #keyfile的位置</span><br><span class="line">  javascriptEnabled: false #是否关闭server端的javascript功能</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">replication:</span><br><span class="line">  replSetName: rs0 #复制集的名称</span><br><span class="line">  oplogSizeMB: 8192 #replication操作日志的最大尺寸，单位：MB</span><br></pre></td></tr></table></figure>
+
+<h2 id="三-在全部节点上都需要进行步骤一和步骤二，全部完成后再进行以下操作"><a href="#三-在全部节点上都需要进行步骤一和步骤二，全部完成后再进行以下操作" class="headerlink" title="三. 在全部节点上都需要进行步骤一和步骤二，全部完成后再进行以下操作"></a>三. 在全部节点上都需要进行步骤一和步骤二，全部完成后再进行以下操作</h2><h2 id="四-配置集群间认证文件mongodb-keyfile"><a href="#四-配置集群间认证文件mongodb-keyfile" class="headerlink" title="四. 配置集群间认证文件mongodb-keyfile"></a>四. 配置集群间认证文件mongodb-keyfile</h2><p>1 . 在主节点ma上执行<code>openssl rand -base64 745 &gt; /etc/mongodb-keyfile</code>。</p>
+<p>2 . 将生成的<strong>/etc/mongodb-keyfile</strong>文件复制到其他节点的相同路径。</p>
+<p>3 . 所有的节点上修改该文件的拥有者与权限：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 /etc/mongodb-keyfile</span><br><span class="line">chown mongod:mongod /etc/mongodb-keyfile</span><br></pre></td></tr></table></figure>
+
+<h2 id="五-在主节点进行集群初始化和管理员账号设置"><a href="#五-在主节点进行集群初始化和管理员账号设置" class="headerlink" title="五. 在主节点进行集群初始化和管理员账号设置"></a>五. 在主节点进行集群初始化和管理员账号设置</h2><p>1 . 编辑主节点的配置文件<strong>/etc/mongod.conf</strong>，将<code>security</code>下的<code>authorization</code>编辑为<code>disabled</code>。</p>
+<blockquote>
+<p>authorization为enable时无法创建管理员账号。</p>
+</blockquote>
+<p>2 . 主节点执行以下指令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mongod.service</span><br><span class="line">systemctl <span class="built_in">enable</span> mongod.service</span><br></pre></td></tr></table></figure>
+<p>3 . 执行<code>mongo</code>进入mongo shell，然后执行以下指令：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rs.initiate()</span><br><span class="line">db.createUser(&#123;<span class="attr">user</span>: <span class="string">"root"</span>,<span class="attr">pwd</span>: <span class="string">"非常复杂的超级管理员密码"</span>,<span class="attr">roles</span>: [ &#123; <span class="attr">role</span>: <span class="string">"root"</span>, <span class="attr">db</span>: <span class="string">"admin"</span> &#125; ]&#125;);</span><br></pre></td></tr></table></figure>
+<p>4 . 退出mongo shell，编辑<strong>/etc/mongod.conf</strong>，将<code>security</code>下的<code>authorization</code>改回为<code>enabled</code>。<br>5 . 执行 <code>systemctl restart mongod.service</code>来重启mongodb服务。</p>
+<h2 id="六-启动其他节点的mongodb服务"><a href="#六-启动其他节点的mongodb服务" class="headerlink" title="六. 启动其他节点的mongodb服务"></a>六. 启动其他节点的mongodb服务</h2><p>在其他节点上启动mongodb服务：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mongod.service</span><br><span class="line">systemctl <span class="built_in">enable</span> mongod.service</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="七-把其他节点添加到集群"><a href="#七-把其他节点添加到集群" class="headerlink" title="七. 把其他节点添加到集群"></a>七. 把其他节点添加到集群</h2><blockquote>
+<p>第五步中已经在主节点里对集群进行了初始化，然后第六步中启动了从节点和仲裁节点的mongodb服务，现在就差将它们加入集群了。</p>
+</blockquote>
+<p>1 . 在主节点执行<code>mongo</code>进入mongo shell，执行以下指令完成用户认证：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br><span class="line">db.auth(<span class="string">'root'</span>, <span class="string">'非常复杂的超级管理员密码'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>2 . 添加从节点</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.add(<span class="string">'mb:27017'</span>)</span><br></pre></td></tr></table></figure>
+<p>3 . 添加仲裁节点</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.addArb(<span class="string">'mc:27017'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="八-创建业务用的数据库与账号"><a href="#八-创建业务用的数据库与账号" class="headerlink" title="八. 创建业务用的数据库与账号"></a>八. 创建业务用的数据库与账号</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use test_db</span><br><span class="line">db.createUser(&#123;<span class="attr">user</span>:<span class="string">'test_user'</span>,<span class="attr">pwd</span>:<span class="string">'复杂的test_user的密码'</span>,<span class="attr">roles</span>:[&#123;<span class="attr">role</span>:<span class="string">"readWrite"</span>,<span class="attr">db</span>:<span class="string">"test_db"</span>&#125;]&#125;)</span><br></pre></td></tr></table></figure>
+<p>现在，业务里可以通过连接字符串<code>mongodb://test_user:复杂的test_user的密码@ma:27017,mb:27017/test_db</code>来对该集群进行读写了。</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2017-2020
+        shengyayun
+      </li>
+      <li>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
     </ul>
   </div>
-</header>
-
-        
-        <section id="about">
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
   
-    <p>软件研发，技术分享，学习笔记，随缘更新。</p>
-
+  <div class="logo">
+    <a href="/"><img src="/images/BetaCat_0933.jpg" alt="shengyayun&#39;s Notebook"></a>
+  </div>
   
-  
-    <p>
-      在这里找到我：
-      
-      
-      
-        
-          <a class="icon" target="_blank" href="http://github.com/shengyayun">
-            <i class="fab fa-github"></i><!--
-      ---></a><!--
-    ---><!--
-    --->   
-        
-      
-        
-          <a class="icon" target="_blank" href="mailto:719048774@qq.com">
-            <i class="fas fa-envelope"></i><!--
-      ---></a><!--
-      ---><!--
-    --->.
-        
-      
-    </p>
-  
-</section>
-
-<section id="writing">
-  <span class="h1"><a href="/archives">文章</a></span>
-  
-  <ul class="post-list">
+  <ul class="nav nav-main">
     
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
     
-      
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
     
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
     
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-07-25T06:12:25.000Z" itemprop="datePublished">2019-07-25</time>
-        
-      
-    </div>
-
-
-        <span>
+    <li class="nav-item">
+      <a class="nav-item-link" href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a>
+    </li>
     
-        <a class="" href="/2019/07/25/mysql-space/">mysql表占用空间分析</a>
-    
-
-
-</span>
-      </li>
-    
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-05-13T12:52:25.000Z" itemprop="datePublished">2019-05-13</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/05/13/docker-stack-deploy/">部署Docker容器到Kubernetes</a>
-    
-
-
-</span>
-      </li>
-    
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-05-04T02:31:37.000Z" itemprop="datePublished">2019-05-04</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/05/04/docker-registry/">创建Docker私有仓库</a>
-    
-
-
-</span>
-      </li>
-    
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-04-29T12:54:48.000Z" itemprop="datePublished">2019-04-29</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/04/29/docker-build-image/">通过Dockerfile生成镜像</a>
-    
-
-
-</span>
-      </li>
-    
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-04-22T14:28:26.000Z" itemprop="datePublished">2019-04-22</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/04/22/raft/">Raft算法分析</a>
-    
-
-
-</span>
-      </li>
-    
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2018-09-29T08:04:52.000Z" itemprop="datePublished">2018-09-29</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2018/09/29/voltdb-deploy/">voltdb的部署</a>
-    
-
-
-</span>
-      </li>
-    
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2018-09-29T08:01:25.000Z" itemprop="datePublished">2018-09-29</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2018/09/29/ssh-disconnect/">SSH自动断开的解决方法</a>
-    
-
-
-</span>
-      </li>
-    
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2018-05-26T14:16:08.000Z" itemprop="datePublished">2018-05-26</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2018/05/26/maven-manifest/">maven打包时在META-INF/MANIFEST.MF中添加主清单属性</a>
-    
-
-
-</span>
-      </li>
-    
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2018-04-26T11:42:30.000Z" itemprop="datePublished">2018-04-26</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2018/04/26/nginx-log-format/">nginx站点访问日志</a>
-    
-
-
-</span>
-      </li>
-    
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2017-12-10T07:18:47.000Z" itemprop="datePublished">2017-12-10</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2017/12/10/mongodb-replica-sets/">mongodb的Replica Sets</a>
-    
-
-
-</span>
-      </li>
+    <li class="nav-item">
+      <a class="nav-item-link" href="mailto:719048774@qq.com" target="_blank" rel="noopener">邮箱</a>
+    </li>
     
   </ul>
-  
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝听可乐吧~</p>
+  <div class="reward-box">
     
-    <div class="pagination">
-        
-        <span class="page-number">第 1 页，共 2 页</span>
-        
-            <a href="/page/2/"><i class="fas fa-angle-right"></i>
-            </a>
-        
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
     </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+<script src="/js/share.js"></script>
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
 
 
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['软件研发，技术分享，学习笔记，随缘更新。','珍珍超可爱！',''],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
   
-</section>
+</script>
 
 
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2019 shengyayun
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/tags/">标签</a></li>
-         
-          <li><a href="/search/">搜索</a></li>
-         
-          <li><a href="http://github.com/shengyayun" target="_blank" rel="noopener">项目</a></li>
-        
-      </ul>
-    </nav>
-  </div>
-</footer>
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
 
     </div>
-    <!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
 
-    <!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-<!-- clipboard -->
+</div>
 
-<script src="/js/main.js"></script>
-<!-- search -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
 
-<!-- Google Analytics -->
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
 
-<!-- Baidu Analytics -->
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
 
-    <script type="text/javascript">
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?3e16ac109a038cf3fea0a2f7cca1bc6c";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-
-<!-- Disqus Comments -->
 
 
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
 </body>
+
 </html>
