@@ -79,6 +79,92 @@ var _hmt = _hmt || [];
     
     
     
+    <article id="post-nacos" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/05/02/nacos/"
+    >部署一个单机模式的Nacos</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/02/nacos/" class="article-date">
+  <time datetime="2020-05-02T02:50:14.000Z" itemprop="datePublished">2020-05-02</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p>部署于Centos7系统，需要额外安装MySQL、JDK8+。</p>
+</blockquote>
+<h2 id="一-MySQL"><a href="#一-MySQL" class="headerlink" title="一. MySQL"></a>一. MySQL</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载Centos7使用的MySQL8</span></span><br><span class="line">wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm</span><br><span class="line">yum localinstall ysql80-community-release-el7-3.noarch.rpm</span><br><span class="line">yum install mysql-community-server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用MySQL服务</span></span><br><span class="line">systemctl start mysqld</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从mysql日志中查找root的一次性密码</span></span><br><span class="line">grep password /var/<span class="built_in">log</span>/mysqld.log</span><br><span class="line"><span class="comment"># 2020-05-02T02:37:53.274469Z 6 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: )jm8BYphsfa&gt;</span></span><br><span class="line"><span class="comment"># 发现系统默认生成的root密码为 )jm8BYphsfa&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新root密码，否则无法执行其他sql</span></span><br><span class="line">mysql -uroot -p<span class="string">')jm8BYphsfa&gt;'</span></span><br><span class="line">alter user <span class="string">'root'</span>@<span class="string">'localhost'</span> identified by <span class="string">'一个很复杂很安全的密码'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建Nacos需要的数据库</span></span><br><span class="line">create database nacos_db;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-JDK8"><a href="#二-JDK8" class="headerlink" title="二. JDK8+"></a>二. JDK8+</h2><blockquote>
+<p>不要忘记设置PATH、JAVA_HOME</p>
+</blockquote>
+<h2 id="三-Nacos"><a href="#三-Nacos" class="headerlink" title="三. Nacos"></a>三. Nacos</h2><blockquote>
+<p>查找Nacos的最新的稳定包： <a href="https://github.com/alibaba/nacos/releases" target="_blank" rel="noopener">https://github.com/alibaba/nacos/releases</a></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载最新的文档包，这里是1.2.1</span></span><br><span class="line">wget https://github.com/alibaba/nacos/releases/download/1.2.1/nacos-server-1.2.1.tar.gz</span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line">tar xzvf nacos-server-1.2.1.tar.gz</span><br><span class="line"><span class="comment"># 将解压出的目录移动到/opt目录下（目录可自选）</span></span><br><span class="line">mv nacos /opt/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑Nacos的配置文件，</span></span><br><span class="line">vi /opt/nacos/conf/application.properties</span><br><span class="line"><span class="comment">##  涉及db.url.0、db.user、db.password。注意db.url.0中的数据库使用第一步中创建的nacos。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用单机模式的Nacos</span></span><br><span class="line">sh /opt/nacos/bin/startup.sh -m standalone</span><br></pre></td></tr></table></figure>
+
+<p>编辑Nacos的配置文件<code>vi /opt/nacos/conf/application.properties</code>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据库使用步骤一中创建的数据库nacos_db</span></span><br><span class="line">db.url.0=jdbc:mysql://127.0.0.1:3306/nacos_db?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 不推荐使用root，可自行创建一个仅有nacos库读写权限的账户</span></span><br><span class="line">db.user=nacos_user</span><br><span class="line">db.password=nacos_passwd</span><br></pre></td></tr></table></figure>
+
+<p>启动单机模式的Nacos：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh /opt/nacos/bin/startup.sh -m standalone</span><br></pre></td></tr></table></figure>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nacos/" rel="tag">nacos</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-mysql-space" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -812,118 +898,6 @@ var _hmt = _hmt || [];
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-mongodb-replica-sets" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2017/12/10/mongodb-replica-sets/"
-    >mongodb的Replica Sets</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2017/12/10/mongodb-replica-sets/" class="article-date">
-  <time datetime="2017-12-10T07:18:47.000Z" itemprop="datePublished">2017-12-10</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><ol>
-<li>我使用了3台服务器来部署Replica Sets，分别为主节点ma、从节点mb、仲裁节点mc(这里的ma、mb、mc已经被我配置进了hosts，可以直接被解析为ip)。</li>
-<li>其中主节点负责写与实时读，从节点负责非实时读（主从数据同步存在延迟）。</li>
-<li>仲裁节点不提供数据读写支持，但会在主节点停止工作后将从节点升级为主节点。</li>
-</ol>
-<h2 id="一-安装"><a href="#一-安装" class="headerlink" title="一. 安装"></a>一. 安装</h2><p>新建文件<strong>/etc/yum.repos.d/mongodb-enterprise.repo</strong>，内容如下：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mongodb-enterprise]</span></span><br><span class="line"><span class="attr">name</span>=MongoDB Enterprise Repository</span><br><span class="line"><span class="attr">baseurl</span>=https://repo.mongodb.com/yum/redhat/<span class="variable">$releasever</span>/mongodb-enterprise/<span class="number">3.4</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">gpgkey</span>=https://www.mongodb.org/static/pgp/server-<span class="number">3.4</span>.asc</span><br></pre></td></tr></table></figure>
-<p>然后直接通过yum安装：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mongodb-enterprise</span><br></pre></td></tr></table></figure>
-
-<h2 id="二-编辑配置文件"><a href="#二-编辑配置文件" class="headerlink" title="二. 编辑配置文件"></a>二. 编辑配置文件</h2><p>执行<code>vi /etc/mongod.conf</code>，配置内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#monogodb</span><br><span class="line"></span><br><span class="line">systemLog:</span><br><span class="line">  destination: file #日志输出目的地</span><br><span class="line">  logAppend: true #当mongod/mongos重启后，是否在现有日志的尾部继续添加日志</span><br><span class="line">  path: /var/log/mongodb/mongod.log #日志路径</span><br><span class="line"></span><br><span class="line">storage:</span><br><span class="line">  dbPath: /var/lib/mongo #mongod进程存储数据目录</span><br><span class="line">  indexBuildRetry: true #当构建索引时mongod意外关闭，那么再次启动重新构建索引</span><br><span class="line">  directoryPerDB: true #不同DB的数据存储在不同的目录中</span><br><span class="line">  journal:</span><br><span class="line">    enabled: true #开启journal日志持久存储，journal日志用来数据恢复</span><br><span class="line"></span><br><span class="line">processManagement:</span><br><span class="line">  fork: true #主进程fork出一个子进程在后台执行</span><br><span class="line">  pidFilePath: /var/run/mongodb/mongod.pid #pid文件地址</span><br><span class="line"></span><br><span class="line">net:</span><br><span class="line">  port: 27017  #默认端口</span><br><span class="line"></span><br><span class="line">security:</span><br><span class="line">  authorization: enabled #是否开启用户访问控制</span><br><span class="line">  clusterAuthMode: keyFile #集群中members之间的认证模式</span><br><span class="line">  keyFile: /etc/mongodb-keyfile #keyfile的位置</span><br><span class="line">  javascriptEnabled: false #是否关闭server端的javascript功能</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">replication:</span><br><span class="line">  replSetName: rs0 #复制集的名称</span><br><span class="line">  oplogSizeMB: 8192 #replication操作日志的最大尺寸，单位：MB</span><br></pre></td></tr></table></figure>
-
-<h2 id="三-在全部节点上都需要进行步骤一和步骤二，全部完成后再进行以下操作"><a href="#三-在全部节点上都需要进行步骤一和步骤二，全部完成后再进行以下操作" class="headerlink" title="三. 在全部节点上都需要进行步骤一和步骤二，全部完成后再进行以下操作"></a>三. 在全部节点上都需要进行步骤一和步骤二，全部完成后再进行以下操作</h2><h2 id="四-配置集群间认证文件mongodb-keyfile"><a href="#四-配置集群间认证文件mongodb-keyfile" class="headerlink" title="四. 配置集群间认证文件mongodb-keyfile"></a>四. 配置集群间认证文件mongodb-keyfile</h2><p>1 . 在主节点ma上执行<code>openssl rand -base64 745 &gt; /etc/mongodb-keyfile</code>。</p>
-<p>2 . 将生成的<strong>/etc/mongodb-keyfile</strong>文件复制到其他节点的相同路径。</p>
-<p>3 . 所有的节点上修改该文件的拥有者与权限：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 /etc/mongodb-keyfile</span><br><span class="line">chown mongod:mongod /etc/mongodb-keyfile</span><br></pre></td></tr></table></figure>
-
-<h2 id="五-在主节点进行集群初始化和管理员账号设置"><a href="#五-在主节点进行集群初始化和管理员账号设置" class="headerlink" title="五. 在主节点进行集群初始化和管理员账号设置"></a>五. 在主节点进行集群初始化和管理员账号设置</h2><p>1 . 编辑主节点的配置文件<strong>/etc/mongod.conf</strong>，将<code>security</code>下的<code>authorization</code>编辑为<code>disabled</code>。</p>
-<blockquote>
-<p>authorization为enable时无法创建管理员账号。</p>
-</blockquote>
-<p>2 . 主节点执行以下指令：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mongod.service</span><br><span class="line">systemctl <span class="built_in">enable</span> mongod.service</span><br></pre></td></tr></table></figure>
-<p>3 . 执行<code>mongo</code>进入mongo shell，然后执行以下指令：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rs.initiate()</span><br><span class="line">db.createUser(&#123;<span class="attr">user</span>: <span class="string">"root"</span>,<span class="attr">pwd</span>: <span class="string">"非常复杂的超级管理员密码"</span>,<span class="attr">roles</span>: [ &#123; <span class="attr">role</span>: <span class="string">"root"</span>, <span class="attr">db</span>: <span class="string">"admin"</span> &#125; ]&#125;);</span><br></pre></td></tr></table></figure>
-<p>4 . 退出mongo shell，编辑<strong>/etc/mongod.conf</strong>，将<code>security</code>下的<code>authorization</code>改回为<code>enabled</code>。<br>5 . 执行 <code>systemctl restart mongod.service</code>来重启mongodb服务。</p>
-<h2 id="六-启动其他节点的mongodb服务"><a href="#六-启动其他节点的mongodb服务" class="headerlink" title="六. 启动其他节点的mongodb服务"></a>六. 启动其他节点的mongodb服务</h2><p>在其他节点上启动mongodb服务：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mongod.service</span><br><span class="line">systemctl <span class="built_in">enable</span> mongod.service</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="七-把其他节点添加到集群"><a href="#七-把其他节点添加到集群" class="headerlink" title="七. 把其他节点添加到集群"></a>七. 把其他节点添加到集群</h2><blockquote>
-<p>第五步中已经在主节点里对集群进行了初始化，然后第六步中启动了从节点和仲裁节点的mongodb服务，现在就差将它们加入集群了。</p>
-</blockquote>
-<p>1 . 在主节点执行<code>mongo</code>进入mongo shell，执行以下指令完成用户认证：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br><span class="line">db.auth(<span class="string">'root'</span>, <span class="string">'非常复杂的超级管理员密码'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>2 . 添加从节点</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.add(<span class="string">'mb:27017'</span>)</span><br></pre></td></tr></table></figure>
-<p>3 . 添加仲裁节点</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.addArb(<span class="string">'mc:27017'</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="八-创建业务用的数据库与账号"><a href="#八-创建业务用的数据库与账号" class="headerlink" title="八. 创建业务用的数据库与账号"></a>八. 创建业务用的数据库与账号</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use test_db</span><br><span class="line">db.createUser(&#123;<span class="attr">user</span>:<span class="string">'test_user'</span>,<span class="attr">pwd</span>:<span class="string">'复杂的test_user的密码'</span>,<span class="attr">roles</span>:[&#123;<span class="attr">role</span>:<span class="string">"readWrite"</span>,<span class="attr">db</span>:<span class="string">"test_db"</span>&#125;]&#125;)</span><br></pre></td></tr></table></figure>
-<p>现在，业务里可以通过连接字符串<code>mongodb://test_user:复杂的test_user的密码@ma:27017,mb:27017/test_db</code>来对该集群进行读写了。</p>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li></ul>
 
 
     </footer>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    mysql表占用空间分析 |  shengyayun&#39;s Notebook
+    部署一个单机模式的Nacos |  shengyayun&#39;s Notebook
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -40,7 +40,7 @@ var _hmt = _hmt || [];
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-mysql-space" class="article article-type-post" itemscope
+  <article id="post-nacos" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -48,7 +48,7 @@ var _hmt = _hmt || [];
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  mysql表占用空间分析
+  部署一个单机模式的Nacos
 </h1>
   
 
@@ -57,8 +57,8 @@ var _hmt = _hmt || [];
 
     
     <div class="article-meta">
-      <a href="/2019/07/25/mysql-space/" class="article-date">
-  <time datetime="2019-07-25T06:12:25.000Z" itemprop="datePublished">2019-07-25</time>
+      <a href="/2020/05/02/nacos/" class="article-date">
+  <time datetime="2020-05-02T02:50:14.000Z" itemprop="datePublished">2020-05-02</time>
 </a>
       
       
@@ -68,7 +68,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">80字</span>
+            <span class="post-count">398字</span>
         </span>
     </span>
 
@@ -88,6 +88,8 @@ var _hmt = _hmt || [];
 
     
     
+    <div class="tocbot"></div>
+
 
 
 
@@ -102,7 +104,25 @@ var _hmt = _hmt || [];
       
 
       
-      <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    table_schema, <span class="comment">#库名</span></span><br><span class="line">    table_name, <span class="comment">#表名</span></span><br><span class="line">    table_comment, <span class="comment">#表注释</span></span><br><span class="line">    <span class="string">`engine`</span>, <span class="comment">#表引擎</span></span><br><span class="line">    <span class="keyword">ROUND</span>(data_length / <span class="number">1024</span> / <span class="number">1024</span>, <span class="number">2</span>) <span class="keyword">AS</span> <span class="string">'Data'</span>,  <span class="comment">#数据占用(MB)</span></span><br><span class="line">    <span class="keyword">ROUND</span>(data_free / <span class="number">1024</span> / <span class="number">1024</span>, <span class="number">2</span>) <span class="keyword">AS</span> <span class="string">'Free'</span>, <span class="comment">#碎片占用(MB)</span></span><br><span class="line">    <span class="keyword">ROUND</span>(index_length / <span class="number">1024</span> / <span class="number">1024</span>, <span class="number">2</span>) <span class="keyword">AS</span> <span class="string">'Index'</span>, <span class="comment">#索引占用(MB)</span></span><br><span class="line">    <span class="keyword">ROUND</span>((data_length + data_free + index_length) / <span class="number">1024</span> / <span class="number">1024</span>, <span class="number">2</span>) <span class="keyword">AS</span> <span class="string">'Total'</span> <span class="comment">#合计占用</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    information_schema.tables</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    table_schema <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="string">'mysql'</span> , <span class="string">'sys'</span>, <span class="string">'information_schema'</span>, <span class="string">'performance_schema'</span>)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> data_length + data_free + index_length <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+      <blockquote>
+<p>部署于Centos7系统，需要额外安装MySQL、JDK8+。</p>
+</blockquote>
+<h2 id="一-MySQL"><a href="#一-MySQL" class="headerlink" title="一. MySQL"></a>一. MySQL</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载Centos7使用的MySQL8</span></span><br><span class="line">wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm</span><br><span class="line">yum localinstall ysql80-community-release-el7-3.noarch.rpm</span><br><span class="line">yum install mysql-community-server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用MySQL服务</span></span><br><span class="line">systemctl start mysqld</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从mysql日志中查找root的一次性密码</span></span><br><span class="line">grep password /var/<span class="built_in">log</span>/mysqld.log</span><br><span class="line"><span class="comment"># 2020-05-02T02:37:53.274469Z 6 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: )jm8BYphsfa&gt;</span></span><br><span class="line"><span class="comment"># 发现系统默认生成的root密码为 )jm8BYphsfa&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新root密码，否则无法执行其他sql</span></span><br><span class="line">mysql -uroot -p<span class="string">')jm8BYphsfa&gt;'</span></span><br><span class="line">alter user <span class="string">'root'</span>@<span class="string">'localhost'</span> identified by <span class="string">'一个很复杂很安全的密码'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建Nacos需要的数据库</span></span><br><span class="line">create database nacos_db;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-JDK8"><a href="#二-JDK8" class="headerlink" title="二. JDK8+"></a>二. JDK8+</h2><blockquote>
+<p>不要忘记设置PATH、JAVA_HOME</p>
+</blockquote>
+<h2 id="三-Nacos"><a href="#三-Nacos" class="headerlink" title="三. Nacos"></a>三. Nacos</h2><blockquote>
+<p>查找Nacos的最新的稳定包： <a href="https://github.com/alibaba/nacos/releases" target="_blank" rel="noopener">https://github.com/alibaba/nacos/releases</a></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载最新的文档包，这里是1.2.1</span></span><br><span class="line">wget https://github.com/alibaba/nacos/releases/download/1.2.1/nacos-server-1.2.1.tar.gz</span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line">tar xzvf nacos-server-1.2.1.tar.gz</span><br><span class="line"><span class="comment"># 将解压出的目录移动到/opt目录下（目录可自选）</span></span><br><span class="line">mv nacos /opt/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑Nacos的配置文件，</span></span><br><span class="line">vi /opt/nacos/conf/application.properties</span><br><span class="line"><span class="comment">##  涉及db.url.0、db.user、db.password。注意db.url.0中的数据库使用第一步中创建的nacos。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用单机模式的Nacos</span></span><br><span class="line">sh /opt/nacos/bin/startup.sh -m standalone</span><br></pre></td></tr></table></figure>
+
+<p>编辑Nacos的配置文件<code>vi /opt/nacos/conf/application.properties</code>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据库使用步骤一中创建的数据库nacos_db</span></span><br><span class="line">db.url.0=jdbc:mysql://127.0.0.1:3306/nacos_db?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 不推荐使用root，可自行创建一个仅有nacos库读写权限的账户</span></span><br><span class="line">db.user=nacos_user</span><br><span class="line">db.password=nacos_passwd</span><br></pre></td></tr></table></figure>
+
+<p>启动单机模式的Nacos：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh /opt/nacos/bin/startup.sh -m standalone</span><br></pre></td></tr></table></figure>
+
       
       <!-- reward -->
       
@@ -171,14 +191,14 @@ var _hmt = _hmt || [];
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http:shengyayun.github.io/2019/07/25/mysql-space/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http:shengyayun.github.io/2020/05/02/nacos/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nacos/" rel="tag">nacos</a></li></ul>
 
 
     </footer>
@@ -189,19 +209,10 @@ var _hmt = _hmt || [];
   
   <nav class="article-nav">
     
-      <a href="/2020/05/02/nacos/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            部署一个单机模式的Nacos
-          
-        </div>
-      </a>
     
-    
-      <a href="/2019/05/13/docker-stack-deploy/" class="article-nav-link">
+      <a href="/2019/07/25/mysql-space/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">部署Docker容器到Kubernetes</div>
+        <div class="article-nav-title">mysql表占用空间分析</div>
       </a>
     
   </nav>
