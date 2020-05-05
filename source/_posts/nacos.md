@@ -8,9 +8,10 @@ tags: [nacos,centos]
 
 ## 一. MySQL
 ```sh
-# 下载Centos7使用的MySQL8
-wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
-yum localinstall ysql80-community-release-el7-3.noarch.rpm
+# 下载Centos7使用的MySQL5.7
+# 截止2020-05-03，Nacos最新版本不支持MySQL8+
+wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm
+yum localinstall mysql57-community-release-el7-10.noarch.rpm
 yum install mysql-community-server
 
 # 启用MySQL服务
@@ -53,6 +54,9 @@ sh /opt/nacos/bin/startup.sh -m standalone
 
 编辑Nacos的配置文件`vi /opt/nacos/conf/application.properties`：
 ```sh
+# 取消MySQL相关的注释
+spring.datasource.platform=mysql
+db.num=1
 # 数据库使用步骤一中创建的数据库nacos_db
 db.url.0=jdbc:mysql://127.0.0.1:3306/nacos_db?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
 # 不推荐使用root，可自行创建一个仅有nacos库读写权限的账户
