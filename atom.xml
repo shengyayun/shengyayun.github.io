@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="shengyayun.github.io/"/>
+  <link href="shengyayun.tech/"/>
   <updated>2020-05-03T12:53:30.775Z</updated>
-  <id>shengyayun.github.io/</id>
+  <id>shengyayun.tech/</id>
   
   <author>
     <name>shengyayun</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>部署一个单机模式的Nacos</title>
-    <link href="shengyayun.github.io/2020/05/02/nacos/"/>
-    <id>shengyayun.github.io/2020/05/02/nacos/</id>
+    <link href="shengyayun.tech/2020/05/02/nacos/"/>
+    <id>shengyayun.tech/2020/05/02/nacos/</id>
     <published>2020-05-02T02:50:14.000Z</published>
     <updated>2020-05-03T12:53:30.775Z</updated>
     
@@ -39,16 +39,16 @@
     
     
     
-      <category term="centos" scheme="shengyayun.github.io/tags/centos/"/>
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
-      <category term="nacos" scheme="shengyayun.github.io/tags/nacos/"/>
+      <category term="nacos" scheme="shengyayun.tech/tags/nacos/"/>
     
   </entry>
   
   <entry>
     <title>mysql表占用空间分析</title>
-    <link href="shengyayun.github.io/2019/07/25/mysql-space/"/>
-    <id>shengyayun.github.io/2019/07/25/mysql-space/</id>
+    <link href="shengyayun.tech/2019/07/25/mysql-space/"/>
+    <id>shengyayun.tech/2019/07/25/mysql-space/</id>
     <published>2019-07-25T06:12:25.000Z</published>
     <updated>2019-10-26T04:24:07.953Z</updated>
     
@@ -65,14 +65,14 @@
     
     
     
-      <category term="mysql" scheme="shengyayun.github.io/tags/mysql/"/>
+      <category term="mysql" scheme="shengyayun.tech/tags/mysql/"/>
     
   </entry>
   
   <entry>
     <title>部署Docker容器到Kubernetes</title>
-    <link href="shengyayun.github.io/2019/05/13/docker-stack-deploy/"/>
-    <id>shengyayun.github.io/2019/05/13/docker-stack-deploy/</id>
+    <link href="shengyayun.tech/2019/05/13/docker-stack-deploy/"/>
+    <id>shengyayun.tech/2019/05/13/docker-stack-deploy/</id>
     <published>2019-05-13T12:52:25.000Z</published>
     <updated>2019-10-26T04:24:07.948Z</updated>
     
@@ -90,18 +90,18 @@
     
     
     
-      <category term="centos" scheme="shengyayun.github.io/tags/centos/"/>
+      <category term="docker" scheme="shengyayun.tech/tags/docker/"/>
     
-      <category term="docker" scheme="shengyayun.github.io/tags/docker/"/>
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
-      <category term="kubernetes" scheme="shengyayun.github.io/tags/kubernetes/"/>
+      <category term="kubernetes" scheme="shengyayun.tech/tags/kubernetes/"/>
     
   </entry>
   
   <entry>
     <title>创建Docker私有仓库</title>
-    <link href="shengyayun.github.io/2019/05/04/docker-registry/"/>
-    <id>shengyayun.github.io/2019/05/04/docker-registry/</id>
+    <link href="shengyayun.tech/2019/05/04/docker-registry/"/>
+    <id>shengyayun.tech/2019/05/04/docker-registry/</id>
     <published>2019-05-04T02:31:37.000Z</published>
     <updated>2019-10-26T04:24:07.947Z</updated>
     
@@ -119,16 +119,16 @@
     
     
     
-      <category term="centos" scheme="shengyayun.github.io/tags/centos/"/>
+      <category term="docker" scheme="shengyayun.tech/tags/docker/"/>
     
-      <category term="docker" scheme="shengyayun.github.io/tags/docker/"/>
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
   </entry>
   
   <entry>
     <title>通过Dockerfile生成镜像</title>
-    <link href="shengyayun.github.io/2019/04/29/docker-build-image/"/>
-    <id>shengyayun.github.io/2019/04/29/docker-build-image/</id>
+    <link href="shengyayun.tech/2019/04/29/docker-build-image/"/>
+    <id>shengyayun.tech/2019/04/29/docker-build-image/</id>
     <published>2019-04-29T12:54:48.000Z</published>
     <updated>2019-10-26T04:24:07.946Z</updated>
     
@@ -146,16 +146,16 @@
     
     
     
-      <category term="centos" scheme="shengyayun.github.io/tags/centos/"/>
+      <category term="docker" scheme="shengyayun.tech/tags/docker/"/>
     
-      <category term="docker" scheme="shengyayun.github.io/tags/docker/"/>
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
   </entry>
   
   <entry>
     <title>Raft算法分析</title>
-    <link href="shengyayun.github.io/2019/04/22/raft/"/>
-    <id>shengyayun.github.io/2019/04/22/raft/</id>
+    <link href="shengyayun.tech/2019/04/22/raft/"/>
+    <id>shengyayun.tech/2019/04/22/raft/</id>
     <published>2019-04-22T14:28:26.000Z</published>
     <updated>2019-10-26T04:24:07.956Z</updated>
     
@@ -173,14 +173,14 @@
     
     
     
-      <category term="raft" scheme="shengyayun.github.io/tags/raft/"/>
+      <category term="raft" scheme="shengyayun.tech/tags/raft/"/>
     
   </entry>
   
   <entry>
     <title>voltdb的部署</title>
-    <link href="shengyayun.github.io/2018/09/29/voltdb-deploy/"/>
-    <id>shengyayun.github.io/2018/09/29/voltdb-deploy/</id>
+    <link href="shengyayun.tech/2018/09/29/voltdb-deploy/"/>
+    <id>shengyayun.tech/2018/09/29/voltdb-deploy/</id>
     <published>2018-09-29T08:04:52.000Z</published>
     <updated>2019-10-26T04:24:07.959Z</updated>
     
@@ -197,16 +197,16 @@
     
     
     
-      <category term="centos" scheme="shengyayun.github.io/tags/centos/"/>
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
-      <category term="voltdb" scheme="shengyayun.github.io/tags/voltdb/"/>
+      <category term="voltdb" scheme="shengyayun.tech/tags/voltdb/"/>
     
   </entry>
   
   <entry>
     <title>SSH自动断开的解决方法</title>
-    <link href="shengyayun.github.io/2018/09/29/ssh-disconnect/"/>
-    <id>shengyayun.github.io/2018/09/29/ssh-disconnect/</id>
+    <link href="shengyayun.tech/2018/09/29/ssh-disconnect/"/>
+    <id>shengyayun.tech/2018/09/29/ssh-disconnect/</id>
     <published>2018-09-29T08:01:25.000Z</published>
     <updated>2019-10-26T04:24:07.957Z</updated>
     
@@ -224,16 +224,16 @@
     
     
     
-      <category term="centos" scheme="shengyayun.github.io/tags/centos/"/>
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
-      <category term="ssh" scheme="shengyayun.github.io/tags/ssh/"/>
+      <category term="ssh" scheme="shengyayun.tech/tags/ssh/"/>
     
   </entry>
   
   <entry>
     <title>maven打包时在META-INF/MANIFEST.MF中添加主清单属性</title>
-    <link href="shengyayun.github.io/2018/05/26/maven-manifest/"/>
-    <id>shengyayun.github.io/2018/05/26/maven-manifest/</id>
+    <link href="shengyayun.tech/2018/05/26/maven-manifest/"/>
+    <id>shengyayun.tech/2018/05/26/maven-manifest/</id>
     <published>2018-05-26T14:16:08.000Z</published>
     <updated>2019-10-26T04:24:07.950Z</updated>
     
@@ -250,18 +250,18 @@
     
     
     
-      <category term="java" scheme="shengyayun.github.io/tags/java/"/>
+      <category term="java" scheme="shengyayun.tech/tags/java/"/>
     
-      <category term="maven" scheme="shengyayun.github.io/tags/maven/"/>
+      <category term="maven" scheme="shengyayun.tech/tags/maven/"/>
     
-      <category term="manifest" scheme="shengyayun.github.io/tags/manifest/"/>
+      <category term="manifest" scheme="shengyayun.tech/tags/manifest/"/>
     
   </entry>
   
   <entry>
     <title>nginx站点访问日志</title>
-    <link href="shengyayun.github.io/2018/04/26/nginx-log-format/"/>
-    <id>shengyayun.github.io/2018/04/26/nginx-log-format/</id>
+    <link href="shengyayun.tech/2018/04/26/nginx-log-format/"/>
+    <id>shengyayun.tech/2018/04/26/nginx-log-format/</id>
     <published>2018-04-26T11:42:30.000Z</published>
     <updated>2019-10-26T04:24:07.954Z</updated>
     
@@ -278,14 +278,14 @@
     
     
     
-      <category term="nginx" scheme="shengyayun.github.io/tags/nginx/"/>
+      <category term="nginx" scheme="shengyayun.tech/tags/nginx/"/>
     
   </entry>
   
   <entry>
     <title>mongodb的Replica Sets</title>
-    <link href="shengyayun.github.io/2017/12/10/mongodb-replica-sets/"/>
-    <id>shengyayun.github.io/2017/12/10/mongodb-replica-sets/</id>
+    <link href="shengyayun.tech/2017/12/10/mongodb-replica-sets/"/>
+    <id>shengyayun.tech/2017/12/10/mongodb-replica-sets/</id>
     <published>2017-12-10T07:18:47.000Z</published>
     <updated>2019-10-26T04:24:07.951Z</updated>
     
@@ -303,16 +303,16 @@
     
     
     
-      <category term="centos" scheme="shengyayun.github.io/tags/centos/"/>
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
-      <category term="mongodb" scheme="shengyayun.github.io/tags/mongodb/"/>
+      <category term="mongodb" scheme="shengyayun.tech/tags/mongodb/"/>
     
   </entry>
   
   <entry>
     <title>swoole_http_server中request的全局对象</title>
-    <link href="shengyayun.github.io/2017/11/12/swoole-http-server-request-global/"/>
-    <id>shengyayun.github.io/2017/11/12/swoole-http-server-request-global/</id>
+    <link href="shengyayun.tech/2017/11/12/swoole-http-server-request-global/"/>
+    <id>shengyayun.tech/2017/11/12/swoole-http-server-request-global/</id>
     <published>2017-11-12T11:16:46.000Z</published>
     <updated>2019-10-26T04:24:07.958Z</updated>
     
@@ -329,16 +329,16 @@
     
     
     
-      <category term="php" scheme="shengyayun.github.io/tags/php/"/>
+      <category term="php" scheme="shengyayun.tech/tags/php/"/>
     
-      <category term="swoole" scheme="shengyayun.github.io/tags/swoole/"/>
+      <category term="swoole" scheme="shengyayun.tech/tags/swoole/"/>
     
   </entry>
   
   <entry>
     <title>用php实现curl的data-binary</title>
-    <link href="shengyayun.github.io/2017/10/01/php-curl-data-binary/"/>
-    <id>shengyayun.github.io/2017/10/01/php-curl-data-binary/</id>
+    <link href="shengyayun.tech/2017/10/01/php-curl-data-binary/"/>
+    <id>shengyayun.tech/2017/10/01/php-curl-data-binary/</id>
     <published>2017-10-01T12:45:50.000Z</published>
     <updated>2019-10-26T04:24:07.955Z</updated>
     
@@ -356,16 +356,16 @@
     
     
     
-      <category term="influxdb" scheme="shengyayun.github.io/tags/influxdb/"/>
+      <category term="influxdb" scheme="shengyayun.tech/tags/influxdb/"/>
     
-      <category term="php" scheme="shengyayun.github.io/tags/php/"/>
+      <category term="php" scheme="shengyayun.tech/tags/php/"/>
     
   </entry>
   
   <entry>
     <title>grafana的部署</title>
-    <link href="shengyayun.github.io/2017/09/30/grafana-deploy/"/>
-    <id>shengyayun.github.io/2017/09/30/grafana-deploy/</id>
+    <link href="shengyayun.tech/2017/09/30/grafana-deploy/"/>
+    <id>shengyayun.tech/2017/09/30/grafana-deploy/</id>
     <published>2017-09-30T13:34:48.000Z</published>
     <updated>2019-10-26T04:24:07.948Z</updated>
     
@@ -382,16 +382,16 @@
     
     
     
-      <category term="centos" scheme="shengyayun.github.io/tags/centos/"/>
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
-      <category term="grafana" scheme="shengyayun.github.io/tags/grafana/"/>
+      <category term="grafana" scheme="shengyayun.tech/tags/grafana/"/>
     
   </entry>
   
   <entry>
     <title>collectd的部署</title>
-    <link href="shengyayun.github.io/2017/09/30/collectd-deploy/"/>
-    <id>shengyayun.github.io/2017/09/30/collectd-deploy/</id>
+    <link href="shengyayun.tech/2017/09/30/collectd-deploy/"/>
+    <id>shengyayun.tech/2017/09/30/collectd-deploy/</id>
     <published>2017-09-30T13:29:21.000Z</published>
     <updated>2019-10-26T04:24:07.943Z</updated>
     
@@ -408,16 +408,16 @@
     
     
     
-      <category term="collectd" scheme="shengyayun.github.io/tags/collectd/"/>
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
-      <category term="centos" scheme="shengyayun.github.io/tags/centos/"/>
+      <category term="collectd" scheme="shengyayun.tech/tags/collectd/"/>
     
   </entry>
   
   <entry>
     <title>influxdb的部署</title>
-    <link href="shengyayun.github.io/2017/09/30/influxdb-deploy/"/>
-    <id>shengyayun.github.io/2017/09/30/influxdb-deploy/</id>
+    <link href="shengyayun.tech/2017/09/30/influxdb-deploy/"/>
+    <id>shengyayun.tech/2017/09/30/influxdb-deploy/</id>
     <published>2017-09-30T13:16:53.000Z</published>
     <updated>2019-10-26T04:24:07.949Z</updated>
     
@@ -435,16 +435,16 @@
     
     
     
-      <category term="centos" scheme="shengyayun.github.io/tags/centos/"/>
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
-      <category term="influxdb" scheme="shengyayun.github.io/tags/influxdb/"/>
+      <category term="influxdb" scheme="shengyayun.tech/tags/influxdb/"/>
     
   </entry>
   
   <entry>
     <title>mysql配置与运行状态的分析与优化</title>
-    <link href="shengyayun.github.io/2017/08/15/mysql-optimize/"/>
-    <id>shengyayun.github.io/2017/08/15/mysql-optimize/</id>
+    <link href="shengyayun.tech/2017/08/15/mysql-optimize/"/>
+    <id>shengyayun.tech/2017/08/15/mysql-optimize/</id>
     <published>2017-08-15T11:38:10.000Z</published>
     <updated>2019-10-26T04:24:07.952Z</updated>
     
@@ -462,7 +462,7 @@
     
     
     
-      <category term="mysql" scheme="shengyayun.github.io/tags/mysql/"/>
+      <category term="mysql" scheme="shengyayun.tech/tags/mysql/"/>
     
   </entry>
   
