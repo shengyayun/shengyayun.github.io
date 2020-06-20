@@ -54,9 +54,9 @@
       
         <tags>
             
-            <tag> docker </tag>
-            
             <tag> centos </tag>
+            
+            <tag> docker </tag>
             
             <tag> kubernetes </tag>
             
@@ -77,9 +77,9 @@
       
         <tags>
             
-            <tag> docker </tag>
-            
             <tag> centos </tag>
+            
+            <tag> docker </tag>
             
         </tags>
       
@@ -98,9 +98,9 @@
       
         <tags>
             
-            <tag> docker </tag>
-            
             <tag> centos </tag>
+            
+            <tag> docker </tag>
             
         </tags>
       
@@ -306,9 +306,9 @@
       
         <tags>
             
-            <tag> centos </tag>
-            
             <tag> collectd </tag>
+            
+            <tag> centos </tag>
             
         </tags>
       
