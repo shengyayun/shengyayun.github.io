@@ -90,9 +90,9 @@
     
     
     
-      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
-    
       <category term="docker" scheme="shengyayun.tech/tags/docker/"/>
+    
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
       <category term="kubernetes" scheme="shengyayun.tech/tags/kubernetes/"/>
     
@@ -119,9 +119,9 @@
     
     
     
-      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
-    
       <category term="docker" scheme="shengyayun.tech/tags/docker/"/>
+    
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
   </entry>
   
@@ -146,9 +146,9 @@
     
     
     
-      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
-    
       <category term="docker" scheme="shengyayun.tech/tags/docker/"/>
+    
+      <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
     
   </entry>
   
@@ -408,9 +408,9 @@
     
     
     
-      <category term="collectd" scheme="shengyayun.tech/tags/collectd/"/>
-    
       <category term="centos" scheme="shengyayun.tech/tags/centos/"/>
+    
+      <category term="collectd" scheme="shengyayun.tech/tags/collectd/"/>
     
   </entry>
   
