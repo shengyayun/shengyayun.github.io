@@ -10,12 +10,12 @@
 
 <h2 id="二-docker-stack-deploy"><a href="#二-docker-stack-deploy" class="headerlink" title="二. docker stack deploy"></a>二. docker stack deploy</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># service组成的完整的功能模块（甚至是系统）被称为stack。指定orchestrator为k8s，通过上一步保存的yml文件，生成名为hello的stack。</span></span><br><span class="line">docker stack deploy --orchestrator=kubernetes -c compose.yml hello</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看k8s的全部resources</span></span><br><span class="line">kubectl get all</span><br><span class="line"><span class="comment"># 查看docker的全部stack</span></span><br><span class="line">docker stack ls</span><br></pre></td></tr></table></figure>
 </div></article></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=undefined"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=undefined"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=undefined"></script><script>var gitalk = new Gitalk({
-  clientID: '',
-  clientSecret: '',
+  clientID: 'c2e12278952df76e7f3f',
+  clientSecret: '4a353847598b9b3f4dccb9ba97836d1e4602dd5b',
   repo: 'shengyayun.github.io',
   owner: 'shengyayun',
   admin: ['shengyayun'],
   id: md5(location.pathname),
   distractionFreeMode: false
 })
-gitalk.render('container')</script></div></main><footer class="footer-container"><div class="paginator"><a href="/2019/07/25/mysql-space/" class="prev">上一篇</a><a href="/2019/05/04/docker-registry/" class="next">下一篇</a></div><div class="copyright"><p>© 2017 - 2020 <a href="shengyayun.tech">shengyayun</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer></body></html>
+gitalk.render('container')</script></div></main><footer class="footer-container"><div class="paginator"><a href="/2019/07/25/mysql-space/" class="prev">PREV</a><a href="/2019/05/04/docker-registry/" class="next">NEXT</a></div><div class="copyright"><p>© 2017 - 2020 <a href="shengyayun.tech">shengyayun</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer></body></html>
