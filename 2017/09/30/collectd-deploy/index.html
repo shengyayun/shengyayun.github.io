@@ -22,4 +22,13 @@
 <h2 id="五-服务运行与开机自启动"><a href="#五-服务运行与开机自启动" class="headerlink" title="五.  服务运行与开机自启动"></a>五.  服务运行与开机自启动</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start influxdb</span><br><span class="line">systemctl <span class="built_in">enable</span> influxdb</span><br></pre></td></tr></table></figure>
 
 <h2 id="六-测试"><a href="#六-测试" class="headerlink" title="六. 测试"></a>六. 测试</h2><p>通过influx shell查看数据库collectd数据库，一切正常的话，里面会出现名为cpu_value的measurement。这说明collectd的cpu组件已经在不停地往influxdb写入数据了。</p>
-</div></article></div></div></main><footer class="footer-container"><div class="paginator"><a href="/2017/09/30/grafana-deploy/" class="prev">PREV</a><a href="/2017/09/30/influxdb-deploy/" class="next">NEXT</a></div><div class="copyright"><p>© 2017 - 2020 <a href="shengyayun.tech">shengyayun</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer></body></html>
+</div></article></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=undefined"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=undefined"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=undefined"></script><script>var gitalk = new Gitalk({
+  clientID: '',
+  clientSecret: '',
+  repo: 'shengyayun.tech',
+  owner: 'shengyayun',
+  admin: ['shengyayun'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')</script></div></main><footer class="footer-container"><div class="paginator"><a href="/2017/09/30/grafana-deploy/" class="prev">PREV</a><a href="/2017/09/30/influxdb-deploy/" class="next">NEXT</a></div><div class="copyright"><p>© 2017 - 2020 <a href="shengyayun.tech">shengyayun</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer></body></html>

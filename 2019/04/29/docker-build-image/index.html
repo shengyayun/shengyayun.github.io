@@ -21,4 +21,13 @@
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -d 该容器在后台执行</span></span><br><span class="line"><span class="comment"># -p 4000:80 将容器的80端口映射到本地的4000端口（通过localhost:4000访问容器的openresty的80端口）。</span></span><br><span class="line"><span class="comment"># hello 使用镜像hello</span></span><br><span class="line">docker run -d -p 4000:80 hello</span><br><span class="line"><span class="comment"># 指令执行完成后，控制台输出容器完整的ID</span></span><br></pre></td></tr></table></figure>
 <p>执行<code>docker container ls</code>，docker会打印出本地执行中的全部容器，其中IMAGE为hello的记录对应刚启动的容器。<br>打开浏览器访问<code>http://localhost:4000</code>，可以看到openrestry的默认主页，至此镜像及其对应的容器已创建完成。</p>
-</div></article></div></div></main><footer class="footer-container"><div class="paginator"><a href="/2019/05/04/docker-registry/" class="prev">PREV</a><a href="/2019/04/22/raft/" class="next">NEXT</a></div><div class="copyright"><p>© 2017 - 2020 <a href="shengyayun.tech">shengyayun</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer></body></html>
+</div></article></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=undefined"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=undefined"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=undefined"></script><script>var gitalk = new Gitalk({
+  clientID: '',
+  clientSecret: '',
+  repo: 'shengyayun.tech',
+  owner: 'shengyayun',
+  admin: ['shengyayun'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')</script></div></main><footer class="footer-container"><div class="paginator"><a href="/2019/05/04/docker-registry/" class="prev">PREV</a><a href="/2019/04/22/raft/" class="next">NEXT</a></div><div class="copyright"><p>© 2017 - 2020 <a href="shengyayun.tech">shengyayun</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer></body></html>

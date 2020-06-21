@@ -43,4 +43,13 @@
 
 <h2 id="八-创建业务用的数据库与账号"><a href="#八-创建业务用的数据库与账号" class="headerlink" title="八. 创建业务用的数据库与账号"></a>八. 创建业务用的数据库与账号</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use test_db</span><br><span class="line">db.createUser(&#123;<span class="attr">user</span>:<span class="string">'test_user'</span>,<span class="attr">pwd</span>:<span class="string">'复杂的test_user的密码'</span>,<span class="attr">roles</span>:[&#123;<span class="attr">role</span>:<span class="string">"readWrite"</span>,<span class="attr">db</span>:<span class="string">"test_db"</span>&#125;]&#125;)</span><br></pre></td></tr></table></figure>
 <p>现在，业务里可以通过连接字符串<code>mongodb://test_user:复杂的test_user的密码@ma:27017,mb:27017/test_db</code>来对该集群进行读写了。</p>
-</div></article></div></div></main><footer class="footer-container"><div class="paginator"><a href="/2018/04/26/nginx-log-format/" class="prev">PREV</a><a href="/2017/11/12/swoole-http-server-request-global/" class="next">NEXT</a></div><div class="copyright"><p>© 2017 - 2020 <a href="shengyayun.tech">shengyayun</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer></body></html>
+</div></article></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=undefined"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=undefined"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=undefined"></script><script>var gitalk = new Gitalk({
+  clientID: '',
+  clientSecret: '',
+  repo: 'shengyayun.tech',
+  owner: 'shengyayun',
+  admin: ['shengyayun'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')</script></div></main><footer class="footer-container"><div class="paginator"><a href="/2018/04/26/nginx-log-format/" class="prev">PREV</a><a href="/2017/11/12/swoole-http-server-request-global/" class="next">NEXT</a></div><div class="copyright"><p>© 2017 - 2020 <a href="shengyayun.tech">shengyayun</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer></body></html>
