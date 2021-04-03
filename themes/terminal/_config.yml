@@ -1,0 +1,88 @@
+
+# html lang
+language: zh-Hans
+
+# main menu navigation
+menu:
+  Home: /
+  Tags: /tags
+  Categories: /categories
+  About: /about
+
+# customize your terminal panel
+terminal:
+  home:
+    - pwd:
+      cmd: ssh shengyayun@tech
+      outputs:
+        - text: Welcome to shengyayun's Notebook.
+        - text: "Last login: Thur Jan 01 00:00:00 1970 from Nowhere"
+
+  tags:
+  
+  categories:
+  
+  about:
+    - pwd:
+      cmd: whoami
+      outputs:
+        - text: shengyayun
+          ending: "@"
+        - type: url
+          url: https://github.com/shengyayun
+          text: GitHub
+    - pwd:
+      cmd: whereis me
+      outputs:
+        - text: "me : Hangzhou"
+    - pwd:
+      cmd: man shengyayun
+      outputs:
+        - text: "AUTHOR_NAME(1)"
+        - text: ""
+        - text: "shengyayun"
+        - text: "SELFINTRODUCTION - Full Stack"
+        - text: ""
+        - text: "DESCRIPTION"
+        - text: "Interests: Stay at home"
+        - text: "Email: shengyayun2031@hotmail.com"
+        - text: "珍珍超可爱！"
+
+  post:
+
+  Links:
+    Google: https://www.google.com/
+    
+
+license:
+  name: CC-BY-SA 4.0
+  url: https://creativecommons.org/licenses/by-sa/4.0/
+
+# social media
+# name: url
+social:
+  github: https://github.com/shengyayun
+  
+# Miscelaneous
+favicon: /favicon.ico
+
+# stylesheets loaded in the <head>
+stylesheets:
+- /css/index.css
+
+# scripts loaded in the end of the body
+scripts:
+- /js/nav.js
+- /js/scroll.js
+- /js/index.js
+# the third-party loaded in the head
+third_party:
+  js:
+    jquery: /js/third-party/jquery.min.js
+    velocity: /js/third-party/velocity.min.js 
+    velocity-ui: /js/third-party/velocity.ui.min.js 
+  css:
+    # font-awsome: https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
+    font-awsome: https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css
+    
+

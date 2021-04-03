@@ -84,7 +84,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: prontera
+theme: terminal
 
 ## hexo-generator-feed
 feed:
@@ -95,5 +95,13 @@ feed:
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: git@github.com:shengyayun/shengyayun.github.io.git
+  - type: git
+    repo: git@github.com:shengyayun/shengyayun.github.io.git
+    branch: master
+  - type: git
+    repo: git@github.com:shengyayun/shengyayun.github.io.git
+    branch: src
+    extend_dirs: /
+    ignore_hidden: false
+    ignore_pattern:
+        public: .
