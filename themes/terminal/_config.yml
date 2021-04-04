@@ -6,7 +6,6 @@ language: zh-Hans
 menu:
   Home: /
   Tags: /tags
-  Categories: /categories
   About: /about
 
 # customize your terminal panel
@@ -16,12 +15,9 @@ terminal:
       cmd: ssh shengyayun@tech
       outputs:
         - text: Welcome to shengyayun's Notebook.
-        - text: "Last login: Thur Jan 01 00:00:00 1970 from Nowhere"
 
   tags:
-  
-  categories:
-  
+
   about:
     - pwd:
       cmd: whoami
@@ -44,9 +40,9 @@ terminal:
         - text: "SELFINTRODUCTION - Full Stack"
         - text: ""
         - text: "DESCRIPTION"
-        - text: "Interests: Stay at home"
+        - text: "Interests: [ Code, Switch ]"
         - text: "Email: shengyayun2031@hotmail.com"
-        - text: "珍珍超可爱！"
+        - text: "Tips: 珍珍超可爱！"
 
   post:
 
