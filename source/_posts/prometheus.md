@@ -155,15 +155,19 @@ scrape_configs:
 
   - job_name: "nodes" # 拉取 Node Exporter 的数据
     static_configs:
-      - targets: ["sas-zrtl-beta-1:9100", "sas-zrtl-beta-0:9100", "zrto-test:9100"] # Node Exporter 默认监听 9100 端口
+      - targets: ["localhost:9100"] # Node Exporter 默认监听 9100 端口
 
   - job_name: "mysqld" # 拉取 Mysqld Exporter 的数据
     static_configs:
-      - targets: ["sas-zrtl-beta-1:9104"] # Node Exporter 默认监听 9104 端口
+      - targets: ["localhost:9104"] # Node Exporter 默认监听 9104 端口
 
   - job_name: "kafka" # 拉取 Kafka Exporter 的数据
     static_configs:
-      - targets: ["sas-zrtl-beta-1:9308"] # Node Exporter 默认监听 9308 端口
+      - targets: ["localhost:9308"] # Node Exporter 默认监听 9308 端口
+
+  - job_name: "pushgateway"
+    static_configs:
+      - targets: ["localhost:9091"] # PushGateway 默认监听 9091 端口
 ```
 #### 2. 要求Prometheus重新加载配置文件
 ```
