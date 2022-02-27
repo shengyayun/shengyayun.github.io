@@ -3,9 +3,23 @@ title: 分布式事务：AT模式
 date: 2022-02-25 14:27:13
 tags: Seata
 ---
+#### 场景
+1. 用户提交订单；
+2. 减少库存数量；
 
-**场景：** 1. 用户提交订单；2. 减少库存数量；
 
+#### 术语
+TC (Transaction Coordinator) - 事务协调者
+维护全局和分支事务的状态，驱动全局事务提交或回滚。
+
+TM (Transaction Manager) - 事务管理器
+定义全局事务的范围：开始全局事务、提交或回滚全局事务。
+
+RM (Resource Manager) - 资源管理器
+管理分支事务处理的资源，与TC交谈以注册分支事务和报告分支事务的状态，并驱动分支事务提交或回滚。
+
+
+#### 时序图
 {% plantuml %}
 skinparam ParticipantPadding 20
 skinparam BoxPadding 20

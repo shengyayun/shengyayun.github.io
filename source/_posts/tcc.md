@@ -3,8 +3,12 @@ title: 分布式事务：TCC模式
 date: 2022-02-25 16:02:34
 tags: Seata
 ---
+#### 场景
+1. 用户提交订单；
+2. 减少库存数量；
 
-**场景：** 1. 用户提交订单；2. 减少库存数量；
+
+#### 术语
 **Try：**资源的检测和预留；
 **Confirm：**执行的业务操作提交；要求 Try 成功 Confirm 一定要能成功；
 **Cancel：**预留资源释放；
@@ -12,6 +16,8 @@ tags: Seata
 **允许空回滚：**Try未执行过的情况下，也可以Cancel成功。
 **防悬挂控制：**Cancel后Try被调用也不执行。
 
+
+#### 时序图
 {% plantuml %}
 skinparam ParticipantPadding 20
 skinparam BoxPadding 20
