@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>shengyayun's Notebook</title><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css"><script src="/js/third-party/jquery.min.js">           </script><script src="/js/third-party/velocity.min.js">           </script><script src="/js/third-party/velocity.ui.min.js">           </script><link rel="icon" href="/img/favicon.ico"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="shengyayun's Notebook" type="application/atom+xml">
+</head><body><nav id="nav-bar"><nav class="clear-fix" id="nav-container"><div class="pull-left" id="page-home"><a href="/">shengyayun's Notebook</a></div><i class="fa fa-bars pull-right" id="toggle-nav" aria-hidden="true"></i><ul class="pull-right" id="navs"><li><a class="nav" href="/">Home</a></li><li><a class="nav" href="/tags">Tags</a></li><li><a class="nav" href="/about">About</a></li></ul></nav></nav><header id="header-info"><div id="header-container"><div id="site-info"><div id="terminal-pl"><div id="top-bar"><ul id="control"><li class="btn"></li><li class="btn"></li><li class="btn"></li></ul><div id="file-path"><i class="fa fa-folder folder-ic" aria-hidden="true"></i> shengyayun 10 X 10</div></div><div id="code-pl"></div></div></div></div></header><div id="content-outer"><div id="content-inner"><div class="recent-post-item"><a class="article-title" href="/2017/09/30/grafana-deploy/">grafana的部署</a><time class="article-date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-09-30</time><div class="article-inner"><h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>grafana 是基于JS开发的，功能齐全的度量仪表盘和图形编辑器。我们可以通过collectd和业务代码采集数据，通过influxdb存储数据，最后通过grafana的web端进行展现。</p>
+<h2 id="一-安装"><a href="#一-安装" class="headerlink" title="一. 安装"></a>一. 安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-4.5.2-1.x86_64.rpm</span><br><span class="line">sudo yum localinstall grafana-4.5.2-1.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-http配置修改"><a href="#二-http配置修改" class="headerlink" title="二. http配置修改"></a>二. http配置修改</h2><p>用vim打开文件/etc/grafana/grafana.ini，下面我们查看<code>[server]</code>的配置：</p>
+<ul>
+<li><code>http_port</code>默认是<code>3000</code>，代表它自带的http服务默认监听3000端口。</li>
+<li><code>domain</code>默认是<code>localhost</code>，结合上面的默认端口，我们可以通过<code>http://localhost:3000</code>来访问grafana的图形化界面。</li>
+<li><code>root_url</code>这个配置主要为了在使用反向代理后能正常跳转，同时邮件可以提供正确的url。</li>
+</ul>
+<p>这里有个案例，我希望可以通过<code>http://watch.langdaren.com</code>直接访问grafana，但80端口已经被nginx占用：</p>
+<ol>
+<li><code>http_port</code>不修改，保留默认的<code>3000</code>。</li>
+<li><code>domain</code>改为<code>watch.langdaren.com</code>。</li>
+<li><code>root_url</code>改为<code>http://watch.langdaren.com</code>。</li>
+<li>修改nginx配置，添加一条这样的server配置：<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">　　<span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">　　<span class="attribute">server_name</span>  watch.langdaren.com;</span><br><span class="line">　　<span class="attribute">location</span> / &#123;</span><br><span class="line">　　　　<span class="attribute">proxy_pass</span>   http://127.0.0.1:3000;</span><br><span class="line">　　&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+nginx配置修改完记得先执行<code>nginx -t</code>测试一下配置，然后再执行<code>nginx -s reload</code>进行重启。</li>
+</ol>
+<h2 id="三-smtp配置修改"><a href="#三-smtp配置修改" class="headerlink" title="三. smtp配置修改"></a>三. smtp配置修改</h2><p>配置正确的smtp，可以让grafana可以自动发送邮件，下面我使用我的腾讯邮箱进行配置。<br>用vim打开配置文件，下面我们查看<code>[smtp]</code>的配置：</p>
+<ol>
+<li><code>enabled</code>修改为<code>true</code>。</li>
+<li><code>host</code>修改为邮件系统的发送服务器地址，这里是<code>smtp.exmail.qq.com:465</code>。</li>
+<li><code>user</code>修改为我的邮箱全名<code>719048774@qq.com</code>。</li>
+<li><code>password</code>修改为我的邮箱密码。</li>
+<li><code>from_address</code>修改为邮箱全名<code>719048774@qq.com</code>。</li>
+<li><code>from_name</code>改为<code>shengyayun</code>。</li>
+</ol>
+<h2 id="四-管理员账号配置修改"><a href="#四-管理员账号配置修改" class="headerlink" title="四. 管理员账号配置修改"></a>四. 管理员账号配置修改</h2><p>用vim打开配置文件，下面我们查看<code>[security]</code>的配置：</p>
+<ol>
+<li><code>admin_user</code>默认为<code>admin</code>，这个是管理员账号名，按需修改。</li>
+<li><code>admin_password</code>默认为<code>admin</code>，这个是管理员密码，按需修改。</li>
+</ol>
+<h2 id="五-服务运行与开机自启动"><a href="#五-服务运行与开机自启动" class="headerlink" title="五. 服务运行与开机自启动"></a>五. 服务运行与开机自启动</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start grafana-server</span><br><span class="line">systemctl <span class="built_in">enable</span> grafana-server</span><br></pre></td></tr></table></figure>
+
+<h2 id="六-测试"><a href="#六-测试" class="headerlink" title="六. 测试"></a>六. 测试</h2><p>通过第二步的http配置，就知道如何访问grafana的web端了。默认的地址是<code>http://localhost:3000</code>，在我的案例里的地址是<code>http://watch.langdaren.com</code>。</p>
+<h2 id="七-其他"><a href="#七-其他" class="headerlink" title="七. 其他"></a>七. 其他</h2><p>grafana访问influxdb并创建dashboard之类操作，都是通过grafana的web端的管理员功能完成的，这里不做详细介绍，具体可以查看官网<code>http://docs.grafana.org</code>。</p>
+</div><div class="article-footer"><a class="article-more" href="/2017/09/30/grafana-deploy/#more">more>></a><div class="article-tags"><i class="fa fa-tag" aria-hidden="true"></i><a class="article-tag" href="/tags/#centos">centos</a><a class="article-tag" href="/tags/#grafana">grafana</a></div></div></div><div class="recent-post-item"><a class="article-title" href="/2017/09/30/collectd-deploy/">collectd的部署</a><time class="article-date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-09-30</time><div class="article-inner"><h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>collectd是一款性能监控程序，这里我将采用它对服务器进行监控，然后将数据写入influxdb。阅读该文档前先阅读influxdb的相关文档。</p>
+<h2 id="一-安装"><a href="#一-安装" class="headerlink" title="一. 安装"></a>一. 安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install collectd</span><br><span class="line">yum install collectd-rrdtool</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-修改配置"><a href="#二-修改配置" class="headerlink" title="二. 修改配置"></a>二. 修改配置</h2><ol>
+<li>用vim打开/etc/collectd.conf文件。</li>
+<li>将<code>QDNLookup</code>修改为<code>false</code>。如果要保留为默认的<code>true</code>的话，host必须与ip保持一致。</li>
+<li>取消<code>LoadPlugin logfile</code>的注释，同时取消<code>&lt;Plugin logfile&gt;...&lt;/Plugin&gt;</code>的注释，将其中<code>File Stdout</code>一行改为<code>File &quot;/var/log/collectd.log&quot;</code>，这样collectd的日志会被单独写进这个文件里。</li>
+<li>取消rrdtool组件的注释：<br><code>LoadPlugin rrdtool</code></li>
+<li>为了后续测试collectd功能，取消cpu组件的注释：<br><code>LoadPlugin cpu</code></li>
+<li>通过配置network组件将监控数据传给influxdb：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Plugin</span> <span class="attr">network</span>&gt;</span></span><br><span class="line">　　Server &quot;127.0.0.1&quot; &quot;25826&quot;</span><br><span class="line"><span class="tag">&lt;/<span class="name">Plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+这里的<code>127.0.0.1</code>是influxdb的ip地址，<code>25826</code>是influxdb监听的端口号。</li>
+</ol>
+<h2 id="三-配置influxdb的collectd插件"><a href="#三-配置influxdb的collectd插件" class="headerlink" title="三. 配置influxdb的collectd插件"></a>三. 配置influxdb的collectd插件</h2><ol>
+<li>用vim打开/etc/influxdb/influxdb.conf文件</li>
+<li>将<code>[[collectd]]</code>下面的<code>enabled</code>取消注释，并改为<code>true</code>。</li>
+<li>将<code>[[collectd]]</code>下面的<code>typesdb</code>取消注释，改为/etc/collectd.conf文件中<code>TypesDB</code>指向的<code>types.db</code>文件所在的<strong>目录</strong>。</li>
+<li>重启influxdb服务。</li>
+<li>通过influx shell创建一个新的数据库，取名collectd。</li>
+</ol>
+<h2 id="四-前台执行"><a href="#四-前台执行" class="headerlink" title="四. 前台执行"></a>四. 前台执行</h2><p>在测试过程中发现，如果不先在前台手动执行一次collectd，直接用<code>systemctl start collectd</code>启动服务会导致其一直报错。执行以下指令可以让collectd在前台执行：<br><code>/usr/sbin/collectd -f</code><br>如果没有问题的话就<code>ctrl+c</code>结束程序。</p>
+<h2 id="五-服务运行与开机自启动"><a href="#五-服务运行与开机自启动" class="headerlink" title="五.  服务运行与开机自启动"></a>五.  服务运行与开机自启动</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start influxdb</span><br><span class="line">systemctl <span class="built_in">enable</span> influxdb</span><br></pre></td></tr></table></figure>
+
+<h2 id="六-测试"><a href="#六-测试" class="headerlink" title="六. 测试"></a>六. 测试</h2><p>通过influx shell查看数据库collectd数据库，一切正常的话，里面会出现名为cpu_value的measurement。这说明collectd的cpu组件已经在不停地往influxdb写入数据了。</p>
+</div><div class="article-footer"><a class="article-more" href="/2017/09/30/collectd-deploy/#more">more>></a><div class="article-tags"><i class="fa fa-tag" aria-hidden="true"></i><a class="article-tag" href="/tags/#collectd">collectd</a><a class="article-tag" href="/tags/#centos">centos</a></div></div></div><div class="recent-post-item"><a class="article-title" href="/2017/09/30/influxdb-deploy/">influxdb的部署</a><time class="article-date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-09-30</time><div class="article-inner"><h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>influxdb是目前比较流行的时间序列数据库，本文只介绍如何部署influxdb，具体知识点请查阅相关资料。</p>
+<h2 id="一-下载安装"><a href="#一-下载安装" class="headerlink" title="一. 下载安装"></a>一. 下载安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.influxdata.com/influxdb/releases/influxdb-1.3.5.x86_64.rpm</span><br><span class="line">yum localinstall influxdb-1.3.5.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="二-服务的运行和开机自启动"><a href="#二-服务的运行和开机自启动" class="headerlink" title="二. 服务的运行和开机自启动"></a>二. 服务的运行和开机自启动</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start influxdb</span><br><span class="line">systemctl <span class="built_in">enable</span> influxdb</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="三-使用influx-shell与influxdb进行交互，创建一个管理员账号"><a href="#三-使用influx-shell与influxdb进行交互，创建一个管理员账号" class="headerlink" title="三. 使用influx shell与influxdb进行交互，创建一个管理员账号"></a>三. 使用influx shell与influxdb进行交互，创建一个管理员账号</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">influx</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> admin <span class="keyword">with</span> password <span class="string">&#x27;admin&#x27;</span> <span class="keyword">with</span> <span class="keyword">all</span> privileges <span class="keyword">to</span> admin;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="四-修改配置文件启用权限认证"><a href="#四-修改配置文件启用权限认证" class="headerlink" title="四. 修改配置文件启用权限认证"></a>四. 修改配置文件启用权限认证</h2><ol>
+<li>编辑/etc/influxdb/influxdb.conf文件，将<code>[http]</code>下的<code>auth-enabled</code>修改为<code>true</code>，然后重启服务。</li>
+<li>以后每次登陆influxdb shell，执行指令前都需要先执行<code>auth</code>指令通过身份认证。</li>
+</ol>
+<h2 id="五-修改默认端口"><a href="#五-修改默认端口" class="headerlink" title="五. 修改默认端口"></a>五. 修改默认端口</h2><ol>
+<li>编辑/etc/influxdb/influxdb.conf文件，将<code>[http]</code>下的<code>bind-address = &quot;:8086&quot;</code>中的<code>8086</code>修改为<code>8087</code>，改完后重启服务。</li>
+<li>换了端口后，进入influx shell的指令就变为了<code>influx -port 8087</code></li>
+</ol>
+<h2 id="六-测试"><a href="#六-测试" class="headerlink" title="六. 测试"></a>六. 测试</h2><ol>
+<li>先通过influx shell执行一条创建数据库的语句：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database testDb;</span><br></pre></td></tr></table></figure></li>
+<li>在bash中通过curl进行一次post请求：<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -i -X POST <span class="string">&quot;http://localhost:8087/write?db=testDb&amp;u=admin&amp;p=admin&quot;</span> --data-binary <span class="string">&quot;testMetric,host=mbp value=0.64&quot;</span></span><br><span class="line"><span class="comment">#这里的`db=testDb`就是数据库，`u=admin`和`p=admin`分别是第三步中设置的用户名和密码，`testMetric`是度量，`host=mbp`是标签，`value=0.64`是数据</span></span><br></pre></td></tr></table></figure></li>
+<li>在influx shell中执行查询语句：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use testDb; <span class="operator">/</span><span class="operator">/</span>使用testDb数据库</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> testMetric; <span class="operator">/</span><span class="operator">/</span>查询度量testMetric</span><br></pre></td></tr></table></figure></li>
+</ol>
+</div><div class="article-footer"><a class="article-more" href="/2017/09/30/influxdb-deploy/#more">more>></a><div class="article-tags"><i class="fa fa-tag" aria-hidden="true"></i><a class="article-tag" href="/tags/#centos">centos</a><a class="article-tag" href="/tags/#influxdb">influxdb</a></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div></div><footer><div id="footer-inner"><div class="social-icons"><a class="social-icon" href="https://github.com/shengyayun" target="_blank"><i class="fa fa-github"></i></a></div><p class="design-info">Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://github.com/lazysheep666/terminal_theme" target="_blank">Teminal</a> (<a href="https://github.com/Tonny-Gu/terminal_theme" target="_blank">NekoDaemon Remix</a>)</p><p class="design-info"><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC-BY-SA 4.0</a> 
+Licensed | Copyright © 2022 shengyayun</p></div></footer><script src="/js/nav.js"></script><script src="/js/scroll.js"></script><script src="/js/index.js"></script></body></html>

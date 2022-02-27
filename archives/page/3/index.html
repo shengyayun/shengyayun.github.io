@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>shengyayun's Notebook</title><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css"><script src="/js/third-party/jquery.min.js">           </script><script src="/js/third-party/velocity.min.js">           </script><script src="/js/third-party/velocity.ui.min.js">           </script><link rel="icon" href="/img/favicon.ico"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="shengyayun's Notebook" type="application/atom+xml">
+</head><body><nav id="nav-bar"><nav class="clear-fix" id="nav-container"><div class="pull-left" id="page-home"><a href="/">shengyayun's Notebook</a></div><i class="fa fa-bars pull-right" id="toggle-nav" aria-hidden="true"></i><ul class="pull-right" id="navs"><li><a class="nav" href="/">Home</a></li><li><a class="nav" href="/tags">Tags</a></li><li><a class="nav" href="/about">About</a></li></ul></nav></nav><header id="header-info"><div id="header-container"><div id="site-info"><div id="terminal-pl"><div id="top-bar"><ul id="control"><li class="btn"></li><li class="btn"></li><li class="btn"></li></ul><div id="file-path"><i class="fa fa-folder folder-ic" aria-hidden="true"></i> shengyayun 10 X 10</div></div><div id="code-pl"></div></div></div></div></header><div id="content-outer"><div id="content-inner"><div class="recent-post-item"><a class="article-title" href="/2017/08/15/mysql-optimize/">mysql配置与运行状态的分析与优化</a><time class="article-date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-08-15</time><div class="article-inner"><h2 id="指令："><a href="#指令：" class="headerlink" title="指令："></a>指令：</h2><p>mysql&gt; show variables;//查看mysql具体配置</p>
+<p>mysql&gt; show global status;//查看mysql运行状态</p>
+<p>配置是写在my.cnf里面的，而状态是具体执行时的指标</p>
+<h2 id="慢查："><a href="#慢查：" class="headerlink" title="慢查："></a>慢查：</h2><h4 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h4><p>slow_launch_time：2 //执行时间超过2秒就会被记录为慢查</p>
+<p>slow_query_log：ON //慢查会被记录</p>
+<p>slow_query_log_file：iZ23qcdbhgiZ-slow.log //慢查日志文件名</p>
+<h4 id="状态："><a href="#状态：" class="headerlink" title="状态："></a>状态：</h4><p>slow_launch_threads：0 //创建时间超过slow_launch_time秒的线程数</p>
+<p>slow_queries：0 //慢查个数</p>
+<h2 id="最大连接数："><a href="#最大连接数：" class="headerlink" title="最大连接数："></a>最大连接数：</h2><h4 id="配置：-1"><a href="#配置：-1" class="headerlink" title="配置："></a>配置：</h4><p>max_connections：256 //允许的最大连接数</p>
+<h4 id="状态：-1"><a href="#状态：-1" class="headerlink" title="状态："></a>状态：</h4><p>max_used_connections：123 //实际运行中的最大连接数</p>
+<h4 id="期望："><a href="#期望：" class="headerlink" title="期望："></a>期望：</h4><p>max_used_connections / max_connections * 100% ≈ 85%</p>
+<h2 id="索引缓存-对MyISAM性能影响很大"><a href="#索引缓存-对MyISAM性能影响很大" class="headerlink" title="索引缓存(对MyISAM性能影响很大)"></a>索引缓存(对MyISAM性能影响很大)</h2><h4 id="配置：-2"><a href="#配置：-2" class="headerlink" title="配置："></a>配置：</h4><p>key_buffer_size：134217728 //索引缓存大小</p>
+<h4 id="状态：-2"><a href="#状态：-2" class="headerlink" title="状态："></a>状态：</h4><p>key_read_requests：123 //索引读取请求个数</p>
+<p>Key_reads： 123 //没有命中缓存而去硬盘读取的次数</p>
+<p>Key_blocks_unused：123 //未使用的缓存簇(blocks)数</p>
+<p>Key_blocks_used： //曾经用到的最大的blocks数</p>
+<h4 id="期望：-1"><a href="#期望：-1" class="headerlink" title="期望："></a>期望：</h4><p>key_reads / key_read_requests * 100% &lt; 0.1%</p>
+<p>key_blocks_used / (key_blocks_unused + key_blocks_used) * 100% ≈ 80%</p>
+<h2 id="临时表"><a href="#临时表" class="headerlink" title="临时表"></a>临时表</h2><h4 id="配置：-3"><a href="#配置：-3" class="headerlink" title="配置："></a>配置：</h4><p>max_heap_table_size：16777216 //内存表的最大大小</p>
+<p>tmp_table_size：16777216 //内存临时表最大大小</p>
+<h4 id="状态：-3"><a href="#状态：-3" class="headerlink" title="状态："></a>状态：</h4><p>Created_tmp_disk_tables：0 //创建(内存或磁盘)临时表的次数</p>
+<p>Created_tmp_files：6 //临时文件个数 </p>
+<p>Created_tmp_tables：22 //创建磁盘临时表的次数</p>
+<h4 id="期望：-2"><a href="#期望：-2" class="headerlink" title="期望："></a>期望：</h4><p>理想#### 状态：created_tmp_disk_tables / created_tmp_tables * 100% &lt;= 25%</p>
+<p>备注：</p>
+<p>当查询需要使用临时表的时候，系统会优先创建内存临时表(MEMORY引擎)。但如果内存临时表大小超过了max_heap_table_size或者tmp_table_size，它就会转为磁盘临时表(MyISAM引擎)。</p>
+<h2 id="表缓存"><a href="#表缓存" class="headerlink" title="表缓存"></a>表缓存</h2><h4 id="配置：-4"><a href="#配置：-4" class="headerlink" title="配置："></a>配置：</h4><p>table_cache(table_open_cache)： 3//缓存的打开的表的数量</p>
+<h4 id="状态：-4"><a href="#状态：-4" class="headerlink" title="状态："></a>状态：</h4><p>open_tables：1 //打开表的数量</p>
+<p>opened_tables： 2//表示打开过的表数量</p>
+<h4 id="期望：-3"><a href="#期望：-3" class="headerlink" title="期望："></a>期望：</h4><p>Open_tables / Opened_tables * 100% &gt;= 85%</p>
+<p>Open_tables / table_cache * 100% &lt;= 95%</p>
+<h2 id="线程缓存"><a href="#线程缓存" class="headerlink" title="线程缓存"></a>线程缓存</h2><h4 id="配置：-5"><a href="#配置：-5" class="headerlink" title="配置："></a>配置：</h4><p>thread_cache_size：13 //服务器缓存的用来处理用户查询的线程</p>
+<h4 id="状态：-5"><a href="#状态：-5" class="headerlink" title="状态："></a>状态：</h4><p>threads_created：12 //表示创建过的线程数</p>
+<h2 id="文件打开数"><a href="#文件打开数" class="headerlink" title="文件打开数"></a>文件打开数</h2><h4 id="配置：-6"><a href="#配置：-6" class="headerlink" title="配置："></a>配置：</h4><p>open_files_limit：1024 //允许同时打开的最大文件数</p>
+<h4 id="状态：-6"><a href="#状态：-6" class="headerlink" title="状态："></a>状态：</h4><p>open_files：123 //当前打开的文件数</p>
+<h4 id="期望：-4"><a href="#期望：-4" class="headerlink" title="期望："></a>期望：</h4><p>open_files / open_files_limit * 100% &lt;= 75％</p>
+<h2 id="表锁"><a href="#表锁" class="headerlink" title="表锁"></a>表锁</h2><h4 id="状态：-7"><a href="#状态：-7" class="headerlink" title="状态："></a>状态：</h4><p>table_locks_immediate： 123//立即释放表锁数</p>
+<p>table_locks_waited： 456//需要等待的表锁数</p>
+<h4 id="期望：-5"><a href="#期望：-5" class="headerlink" title="期望："></a>期望：</h4><p>table_locks_immediate / table_locks_waited &gt; 5000 时推荐使用高并发更新性能好的innodb引擎</p>
+</div><div class="article-footer"><a class="article-more" href="/2017/08/15/mysql-optimize/#more">more>></a><div class="article-tags"><i class="fa fa-tag" aria-hidden="true"></i><a class="article-tag" href="/tags/#mysql">mysql</a></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span></div></nav></div></div><footer><div id="footer-inner"><div class="social-icons"><a class="social-icon" href="https://github.com/shengyayun" target="_blank"><i class="fa fa-github"></i></a></div><p class="design-info">Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://github.com/lazysheep666/terminal_theme" target="_blank">Teminal</a> (<a href="https://github.com/Tonny-Gu/terminal_theme" target="_blank">NekoDaemon Remix</a>)</p><p class="design-info"><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC-BY-SA 4.0</a> 
+Licensed | Copyright © 2022 shengyayun</p></div></footer><script src="/js/nav.js"></script><script src="/js/scroll.js"></script><script src="/js/index.js"></script></body></html>
